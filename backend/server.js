@@ -10,4 +10,8 @@ app.use(express.json())
 app.use(express.urlencoded({extended: false}))
 app.use(cors())
 
+
+//routes middleware
+app.use('/api/registerUser')
+
 app.listen(`Sever listening on port ${port}`);
