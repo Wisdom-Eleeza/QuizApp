@@ -5,21 +5,19 @@ const registerUserSchema = new mongoose.Schema({
   name: {
     type: String,
     required: [true, "Name is required"],
-    minlength: 5,
+    minlength: 10,
     maxlength: 255,
   },
   email: {
     type: String,
     required: [true, "Email field is required"],
-    minlength: 5,
-    maxlength: 255,
     unique: true,
   },
   password: {
     type: String,
     required: [true, "Password is a required field"],
     minlength: 5,
-    maxlength: 1024,
+    maxlength: 255,
   },
 });
 
@@ -29,7 +27,7 @@ function validateRegisterUser(user) {
   const schema = Joi.object({
     name: Joi.string().min(5).max(255).required(),
     email: Joi.string().min(5).max(255).required().email(),
-    password: Joi.string().min(5).max(1024).required(),
+    password: Joi.string().min(10).max(255).required(),
   });
   return schema.validate(user);
 }
