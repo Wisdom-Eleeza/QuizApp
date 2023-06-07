@@ -37,13 +37,12 @@ const registerUser = async (req, res) => {
     user.password = await bcrypt.hash(user.password, salt);
     await user.save();
 
-    //Generate a JWT token for the user
-    const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET);
+    //Generate a JWT token for the user which expires in 1 day
+    const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET, {expiresIn: "1d"});
     res.header("x-auth-token", token).status(200).send({
       _id: user._id,
       name: user.name,
       email: user.email,
-      password: user.password,
     });
   } catch (error) {
     console.error(error);
