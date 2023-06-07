@@ -1,9 +1,10 @@
 import React from 'react'
+import styles from './forms.module.css'
 
 const Input = ({label,name,type, placeholder, inputValue, setInputValue}) => {
   return (
-    <div>
-        <label>{label}</label>
+    <div className={styles.inputContainer}>
+        <label className={styles.label}>{label}</label>
         <div>
             <input
                 placeholder={placeholder}
@@ -13,6 +14,7 @@ const Input = ({label,name,type, placeholder, inputValue, setInputValue}) => {
                 onChange={setInputValue}
                 onBlur={e => e.target.placeholder = `${placeholder}`}
                 onFocus={e => e.target.placeholder = `Enter a valid ${name}`}
+                className={styles.input}
                 required
             />
         </div>
