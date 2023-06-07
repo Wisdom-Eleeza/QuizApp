@@ -24,7 +24,15 @@ const registerUserSchema = new mongoose.Schema({
   }
 });
 
+const imageSchema = new mongoose.Schema({
+  upload: {
+    type: Data,
+    default: Date.now(),
+  }
+})
+
 const registerModel = mongoose.model("User", registerUserSchema);
+const imageModel = mongoose.model("Image", imageSchema)
 
 function validateRegisterUser(user) {
   const schema = Joi.object({
@@ -35,4 +43,4 @@ function validateRegisterUser(user) {
   return schema.validate(user);
 }
 
-module.exports = { registerModel, validateRegisterUser };
+module.exports = { registerModel, imageModel, validateRegisterUser };

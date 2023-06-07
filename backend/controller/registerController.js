@@ -4,6 +4,7 @@ const {
 } = require("../models/registerModel");
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
+const upload = require('../middleware/upload')
 const connectDB = require("../config/db");
 const express = require("express");
 const router = express.Router();
@@ -27,6 +28,7 @@ const registerUser = async (req, res) => {
       name: req.body.name,
       email: req.body.email,
       password: req.body.password,
+      profileImage: imagePath,
     });
   }
 
