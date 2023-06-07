@@ -19,6 +19,9 @@ const registerUserSchema = new mongoose.Schema({
     minlength: 5,
     maxlength: 255,
   },
+  profileImage: {
+    type: String,
+  }
 });
 
 const registerModel = mongoose.model("User", registerUserSchema);
