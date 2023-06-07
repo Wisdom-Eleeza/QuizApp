@@ -4,7 +4,7 @@ const {
 } = require("../models/registerModel");
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
-const upload = require('../middleware/upload')
+const upload = require('../middleware/uploadMiddleware')
 const connectDB = require("../config/db");
 const express = require("express");
 const router = express.Router();
