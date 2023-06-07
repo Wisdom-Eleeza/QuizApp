@@ -29,7 +29,6 @@ const registerUser = async (req, res) => {
         name: req.body.name,
         email: req.body.email,
         password: req.body.password,
-        profileImage: imagePath,
       });
     }
 
@@ -39,6 +38,13 @@ const registerUser = async (req, res) => {
     await user.save();
 
     //Generate a JWT token for the user
+    const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET);
+    res.header("x-auth-token", token).status(200).send({
+      _id: user._id,
+      name: user.name,
+      email: user.email,
+      password: user.password,
+    });
   } catch (error) {
     console.error(error);
     res.status(500).send("Internal Server Error");
