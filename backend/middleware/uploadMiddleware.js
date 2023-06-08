@@ -1,16 +1,18 @@
 const multer = require("multer");
 
 // Set up Multer for file upload
-const storage = multer.diskStorage({
-  destination: "upload", // Specify the destination folder for storing images
+const fileStorageEngine = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, 'uploads/');
+  },
   filename: (req, file, cb) => {
-    // Generate a unique filename
     const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1E9);
     const extension = file.mimetype.split("/")[1];
     cb(null, `${uniqueSuffix}.${extension}`);
   },
 });
 
-const upload = multer({ storage });
+const upload = multer({ storage: fileStorageEngine });
 
 module.exports = upload;
+
