@@ -14,22 +14,28 @@ const SelectInterest = () => {
         <span className={styles.interestSpan}>Social Interaction</span>
       </Button>
 
+      <div className={styles.btn1}>
       <Button variant='secondary' type='continue' borderType='curvy'>
         <img src={addIcon} className={styles.googleLogo}/>
         <span className={styles.interestSpan}>Personal development</span>
       </Button>
+      </div>
 
+      <div className={styles.btn1}>
       <Button variant='secondary' type='continue' borderType='curvy'>
       <img src={addIcon} className={styles.googleLogo}/>
         <span className={styles.interestSpan}>Entertainment and Fun </span>
       </Button>
+      </div>
 
+      <div className={styles.btn1}>
       <Button variant='secondary'type='continue' borderType='curvy'>
       <img src={addIcon} className={styles.googleLogo}/>
         <span className={styles.interestSpan}>Rewards and recognition</span>
       </Button>
-      
-      <Button variant='primary' type='continue' >Continue</Button>
+      </div>
+
+      <div className={styles.continueInterest}><Button variant='primary' type='continue' >Continue</Button></div>
     </div>
   )
 }

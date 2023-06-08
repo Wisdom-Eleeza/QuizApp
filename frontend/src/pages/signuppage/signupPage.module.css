@@ -4,4 +4,14 @@
     width: 100vw;
     height: 100vh;
 }
+.formSection{
+    position: relative;
+}
+.pageCounter{
+    display: flex;
+    justify-content: space-between;
+    width: 90%;
+    margin: auto;
+
+}
 

@@ -8,27 +8,45 @@
     line-height: 19px;
     letter-spacing: 0.005em;
     text-align: center;
+    width: 50%;
+    height: 100%;
+    margin: auto;
 
 }
-.formsStep1, .formsStep2, .formsStep2{
+.pageCounter{
+    display: flex;
+    justify-content: space-between;
+    width: 30.063rem;
+}
+.formsStep1, .formsStep2, .formsStep3, .formsStep4, .completedRegistration{
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
 }
-.formsStep1,.formsStep2{
-    display: none;
+.formsStep1,.formsStep2,.formsStep3,.formsStep4{
+    display: none;    
 }
-.heading, .registerHeading{
-    font-size: 33px;
+.heading, .registerHeading, .addInterestHeading{
+    font-size: 2.063rem;
     font-weight: 700;
     line-height: 39px;
     letter-spacing: 0.005em;
-    position: relative;
+    /* position: relative; */
 }
 .registerHeading{
     text-align: left;
     right: 3.7rem;
+}
+.addInterestHeading{
+    text-align: center;
+    width: 65%;
+}
+.addInterestDescription{
+    width: 55%;
+    margin-top: 24px;
+    margin-bottom: 24px;
+
 }
 .googleLogo{
     width: 24px;
@@ -70,11 +88,6 @@
     text-fill-color: transparent;
 }
 .authenticationAlt p{
-    font-style: normal;
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 19px;
-    letter-spacing: 0.005em;
     color: #A6A6A6;
     margin-right: 0.8rem;
 }
@@ -103,4 +116,33 @@
 .interestDescription{
     margin-top: 24px;
     margin-bottom: 33px;
+}
+.btn1{
+    margin-top: 24px;
+    margin-bottom: 24px;
+}
+.continueInterest{
+    margin-top: 103px;
+}
+.addCards{
+    display: grid;
+    grid-template-columns: repeat(2, 2fr);
+    gap: 0.938rem;
+    margin-bottom: 66px;
+}
+.img{
+    width: 75%;
+}
+.completedDescription{
+    margin-top: 18px;
+}
+
+@media (max-width:500px) {
+    .forms{
+        width: 100vw;
+    }
+    .registerHeading{
+        text-align: left;
+        right: 2.4rem;
+    }
 }

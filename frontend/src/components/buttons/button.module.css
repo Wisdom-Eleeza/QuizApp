@@ -59,6 +59,12 @@
     width: 4.563rem;
     height: 36px;
   }
+  .add-btn{
+    border: 1px solid #B3B3B3
+  }
+  .continue-add-btn{
+    width: 18rem;
+  }
   .submit-large {
     width: 21.25rem;
     height: 65px;
@@ -136,13 +142,6 @@
     .signup-expert-btn {
       width: 14.563rem;
       height: 50px;
-    }
-    .upload-btn,
-    .continue,
-    .submit-small,
-    .recommendation-btn,
-    .quiz-btn {
-      width: 22.375rem;
     }
   }
   
