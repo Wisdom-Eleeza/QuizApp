@@ -24,6 +24,12 @@ const registerUserSchema = new mongoose.Schema({
   }
 });
 
+const imageSchema = new mongoose.Schema({
+  name: String,
+  filePath: String,
+});
+
+const imageModel = mongoose.model("Image", imageSchema);
 const registerModel = mongoose.model("User", registerUserSchema);
 
 function validateRegisterUser(user) {
@@ -35,4 +41,4 @@ function validateRegisterUser(user) {
   return schema.validate(user);
 }
 
-module.exports = { registerModel, validateRegisterUser };
+module.exports = { registerModel, imageModel, validateRegisterUser };

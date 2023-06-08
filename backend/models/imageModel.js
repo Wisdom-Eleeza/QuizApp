@@ -1,10 +1,10 @@
-const mongoose = require("mongoose");
+// const mongoose = require("mongoose");
 
-const imageSchema = new mongoose.Schema({
-  name: String,
-  filePath: String,
-});
+// const imageSchema = new mongoose.Schema({
+//   name: String,
+//   filePath: String,
+// });
 
-const imageModel = mongoose.model("Image", imageSchema);
+// const imageModel = mongoose.model("Image", imageSchema);
 
-module.exports = imageModel;
+// module.exports = imageModel;

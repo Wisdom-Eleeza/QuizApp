@@ -1,10 +1,10 @@
-const upload = require('./middleware/uploadMiddleware')
+const upload = require("./middleware/uploadMiddleware");
 const express = require("express");
 const cors = require("cors");
 const dotenv = require("dotenv");
 const app = express();
 const registerRoutes = require("./routes/registerRoutes");
-const imageRoutes = require("./routes/imageRoutes");
+const imageRoutes = require("./routes/registerRoutes");
 
 dotenv.config();
 const port = process.env.PORT || 5000;
