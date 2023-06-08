@@ -2,11 +2,7 @@ const mongoose = require("mongoose");
 
 const imageSchema = new mongoose.Schema({
   name: String,
-  upload: {
-    data: Buffer,
-    contentType: { type: String, default: "image/png" },
-    default: Date.now(),
-  },
+  filePath: String,
 });
 
 const imageModel = mongoose.model("Image", imageSchema);
