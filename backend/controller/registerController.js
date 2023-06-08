@@ -1,12 +1,12 @@
 const {
   registerModel,
   imageModel,
-  validateRegisterUser,
 } = require("../models/registerModel");
 // const imageModel = require("../models/imageModel");
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 const upload = require("../middleware/uploadMiddleware");
+const validateRegisterUser = require('../middleware/validateUser')
 const connectDB = require("../config/db");
 const express = require("express");
 const router = express.Router();

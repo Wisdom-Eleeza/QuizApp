@@ -29,16 +29,9 @@ const imageSchema = new mongoose.Schema({
   filePath: String,
 });
 
-const imageModel = mongoose.model("Image", imageSchema);
 const registerModel = mongoose.model("User", registerUserSchema);
 
-function validateRegisterUser(user) {
-  const schema = Joi.object({
-    name: Joi.string().min(5).max(255).required(),
-    email: Joi.string().min(5).max(255).required().email(),
-    password: Joi.string().min(10).max(255).required(),
-  });
-  return schema.validate(user);
-}
 
-module.exports = { registerModel, imageModel, validateRegisterUser };
+
+const imageModel = mongoose.model("Image", imageSchema);
+module.exports = { registerModel, imageModel };
