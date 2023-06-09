@@ -1,26 +1,26 @@
-const multer = require("multer");
-const upload = require("../middleware/uploadMiddleware");
-require("dotenv").config();
-const cloudinary = require("cloudinary").v2;
+// const multer = require("multer");
+// const upload = require("../middleware/uploadMiddleware");
+// require("dotenv").config();
+// const cloudinary = require("cloudinary").v2;
 
-// Configuring Cloudinary
-cloudinary.config({
-  cloud_name: process.env.CLOUDINARY_NAME,
-  api_key: process.env.CLOUDINARY_API_KEY,
-  api_secret: process.env.CLOUDINARY_API_SECRET,
-});
+// // Configuring Cloudinary
+// cloudinary.config({
+//   cloud_name: process.env.CLOUDINARY_NAME,
+//   api_key: process.env.CLOUDINARY_API_KEY,
+//   api_secret: process.env.CLOUDINARY_API_SECRET,
+// });
 
-const uploadToCloudinary = async (path, QuizMasterImageUpload) => {
-  try {
-    const data = await cloudinary.uploader.upload(path, { QuizMasterImageUpload });
-    return { url: data.url, public_id: data.public_id };
-  } catch (error) {
-    console.error(error);
-    throw error;
-  }
-};
+// const uploadToCloudinary = async (path, QuizMasterImageUpload) => {
+//   try {
+//     const data = await cloudinary.uploader.upload(path, { QuizMasterImageUpload });
+//     return { url: data.url, public_id: data.public_id };
+//   } catch (error) {
+//     console.error(error);
+//     throw error;
+//   }
+// };
 
-module.exports = uploadToCloudinary;
+// module.exports = uploadToCloudinary;
 
 
 
