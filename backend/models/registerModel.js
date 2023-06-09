@@ -1,10 +1,15 @@
 const mongoose = require("mongoose");
 // const Joi = require("joi");
 
-const imageSchema = new mongoose.Schema({
-  name: String,
-  filePath: String,
-});
+// const imageSchema = new mongoose.Schema({
+//   publicId: {
+//     type: String
+//   },
+//   imageUrl: {
+//     name: String,
+//     filePath: String,
+//   },
+// });
 
 const registerUserSchema = new mongoose.Schema({
   name: {
@@ -25,11 +30,11 @@ const registerUserSchema = new mongoose.Schema({
     maxlength: 255,
   },
   profileImage: {
-    type: imageSchema,
+    
   },
 });
 
 const registerModel = mongoose.model("User", registerUserSchema);
 
-const imageModel = mongoose.model("Image", imageSchema);
-module.exports = { registerModel, imageModel };
+// const imageModel = mongoose.model("Image", imageSchema);
+module.exports = { registerModel };

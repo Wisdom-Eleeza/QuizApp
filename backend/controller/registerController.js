@@ -2,7 +2,7 @@ const { registerModel, imageModel } = require("../models/registerModel");
 // const imageModel = require("../models/imageModel");
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
-const upload = require("../middleware/uploadMiddleware");
+// const upload = require("../middleware/uploadMiddleware");
 const validateRegisterUser = require("../middleware/validateUser");
 const connectDB = require("../config/db");
 const express = require("express");
@@ -54,25 +54,25 @@ const registerUser = async (req, res) => {
 };
 
 // image Controller
-const uploadImage = async (req, res) => {
-  try {
-    const uploadedFile = req.file;
-    console.log(req.file);
-    if (!uploadedFile) return res.status(400).send("Image is required");
-    const newImage = new imageModel({
-      name: uploadedFile.originalname,
-      filePath: uploadedFile.path,
-    });
-    await newImage.save();
-    res
-      .status(200)
-      .json({
-        message: "Image uploaded successfully",
-        filePath: uploadedFile.path,
-      });
-  } catch (error) {
-    res.status(500).json({ error: "Failed to upload image" });
-  }
-};
+// const uploadImage = async (req, res) => {
+//   try {
+//     const uploadedFile = req.file;
+//     console.log(req.file);
+//     if (!uploadedFile) return res.status(400).send("Image is required");
+//     const newImage = new imageModel({
+//       name: uploadedFile.originalname,
+//       filePath: uploadedFile.path,
+//     });
+//     await newImage.save();
+//     res
+//       .status(200)
+//       .json({
+//         message: "Image uploaded successfully",
+//         filePath: uploadedFile.path,
+//       });
+//   } catch (error) {
+//     res.status(500).json({ error: "Failed to upload image" });
+//   }
+// };
 
-module.exports = { registerUser, uploadImage };
+module.exports = { registerUser };
