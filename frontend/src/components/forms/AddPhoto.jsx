@@ -3,7 +3,9 @@ import personIcon from '../../assets/Desktop View/Icons/person.png'
 import styles from './forms.module.css'
 import Button from '../buttons/Button'
 
-const AddPhoto = () => {
+const AddPhoto = ({setCount}) => {
+
+
   return (
     <div className={styles.formsStep2}>
         <h2 className={styles.heading}>Add Photo</h2>
@@ -13,11 +15,13 @@ const AddPhoto = () => {
         </div>
         <div className={styles.upload}>
         <Button variant='primary' type='upload-photo'>Upload a photo</Button>
-        <p className={styles.skip}>Skip</p>
+        <p className={styles.skip} onClick={() => setCount(3)}>Skip</p>
         </div>
-        <div className={styles.continueUpload}>
+        {/* {buttonClick ? <div className={styles.continueUpload}>
         <Button variant='primary' type='continue'>Continue</Button>
-        </div>
+        </div> : null
+        } */}
+        
         
     </div>
   )

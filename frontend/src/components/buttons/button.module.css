@@ -54,12 +54,12 @@
     width: 14.563rem;
     height: 64px;
   }
-  .submit-small,
-  .add-btn {
+  .submit-small {
     width: 4.563rem;
     height: 36px;
   }
   .add-btn{
+    padding: 0.512rem 1.375rem;
     border: 1px solid #B3B3B3
   }
   .continue-add-btn{

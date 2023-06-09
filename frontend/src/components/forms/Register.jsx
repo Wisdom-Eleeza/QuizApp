@@ -5,8 +5,10 @@ import styles from './forms.module.css'
 import { NavLink } from 'react-router-dom'
 import google from '../../assets/Desktop View/Icons/Google logo.png'
 
-const Register = ({registerForm, setRegisterForm}) => {
+const Register = ({setCount, count}) => {
     const [inputValue, setInputValue] = useState('')
+    const isSubmitDisabled = !inputValue;
+
   return (
     <div className={styles.formsStep1}>
         <h2 className={styles.registerHeading}>Create Account</h2>
@@ -35,10 +37,10 @@ const Register = ({registerForm, setRegisterForm}) => {
           setInputValue = { e => setInputValue(e.target.value)}
         />
         <div className={styles.createAccountBtn}>
-          <Button variant='primary' type='large' onClick={()=>setRegisterForm(true)}>Create Account</Button>
+          <Button variant='primary' type='large' page='signup' setCount={setCount} count={count}>Create Account</Button>
           </div>
         
-        <Button variant='secondary' type='Large'>
+        <Button variant='secondary' type='Large' page='googleAuth'>
           <img src={google} alt='google logo' className={styles.googleLogo}/>
           <span className={styles.signup}>Sign up with Google</span>
           </Button>

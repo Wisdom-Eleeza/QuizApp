@@ -3,7 +3,7 @@ import styles from './forms.module.css'
 import Button from '../buttons/Button'
 import addIcon from '../../assets/Desktop View/Icons/black-add-icon.png'
 
-const SelectInterest = () => {
+const SelectInterest = ({setCount, count}) => {
   return (
     <div className={styles.formsStep3}>
       <h2 className={styles.heading}>Hey there! What brings you here?</h2>
@@ -35,7 +35,7 @@ const SelectInterest = () => {
       </Button>
       </div>
 
-      <div className={styles.continueInterest}><Button variant='primary' type='continue' >Continue</Button></div>
+      <div className={styles.continueInterest}><Button variant='primary' type='continue'  page='signup' setCount={setCount} count={count}>Continue</Button></div>
     </div>
   )
 }

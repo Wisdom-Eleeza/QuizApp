@@ -7,12 +7,7 @@ const SignupPage = () => {
   return (
     <div className={styles.signupPage}>
       <Gallery/>
-      <div className={styles.formSection}>
-      <div className={styles.pageCounter}>
-        <p>Step <span className={styles.counter}>1</span> of 4</p>
-        <p className={styles.exit}>Exit</p>
-      </div>
-        <Signup/></div>
+      <Signup/>
     </div>
   )
 }

@@ -6,19 +6,41 @@ import SelectInterest from './SelectInterest'
 import AddInterst from './AddInterst'
 import CompletedRegistration from './CompletedRegistration'
 
-const Signup = () => {
-  const [registerForm, setRegisterForm] = useState(false);
-  const [addPhoto, setAddPhoto] = useState(false)
-  const [addInterest, setAddInterest] = useState(false)
-  const [Complete, setComplete] = useState(false)
+const Signup = () => {  
+  const [count, setCount] = useState(1)
+  const [completed, setCompleted] = useState(false)
+  
+
+  const getNextStep = (count) =>{
+    switch(count){
+      case 1:
+          return <Register setCount={setCount}  count={count}/>
+      case 2: 
+       return <AddPhoto setCount={setCount}/>
+      case 3:
+        return <SelectInterest setCount={setCount} count={count}/>
+        case 4:
+          return <AddInterst setCount={setCount} count={count} setCompleted={setCompleted}/>
+        case 5:
+          return <CompletedRegistration />
+      default:
+        return
+    }
+  }
+
+  const handleSubmit = e =>{
+    e.preventDefault();
+  }
 
   return (
-    <form  className={styles.forms}>
-      {registerForm ? <AddPhoto addPhoto setAddPhoto/> : <Register registerForm setRegisterForm/>}
+    <form  className={styles.forms} onSubmit={handleSubmit}>
+      {!completed &&
+      <div className={styles.pageCounter}>
+      <p className={styles.counter}>Step {count}<span > of 4</span></p>
+      <p className={styles.exit}>Exit</p>
+    </div>}
       
-      {addPhoto ? <SelectInterest addInterest setAddInterest/> : null}
-      {addInterest ? <AddInterst/> : null}
-      {completed ? <CompletedRegistration/> : null}
+      {getNextStep(count)}
     </form>
   )
 }

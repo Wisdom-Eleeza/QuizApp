@@ -8,15 +8,23 @@
     line-height: 19px;
     letter-spacing: 0.005em;
     text-align: center;
-    width: 50%;
-    height: 100%;
-    margin: auto;
+    margin-bottom: 144px;
+    width: 100%;
 
 }
 .pageCounter{
     display: flex;
     justify-content: space-between;
-    width: 30.063rem;
+    margin-top: 50px;
+    margin-bottom: 64px;
+    width: 80%;
+    
+}
+.counter{
+    font-weight: bolder;
+}
+.counter span{
+    font-weight: 400;
 }
 .formsStep1, .formsStep2, .formsStep3, .formsStep4, .completedRegistration{
     display: flex;
@@ -24,19 +32,15 @@
     align-items: center;
     justify-content: center;
 }
-.formsStep1,.formsStep2,.formsStep3,.formsStep4{
-    display: none;    
-}
 .heading, .registerHeading, .addInterestHeading{
     font-size: 2.063rem;
     font-weight: 700;
     line-height: 39px;
     letter-spacing: 0.005em;
-    /* position: relative; */
 }
 .registerHeading{
     text-align: left;
-    right: 3.7rem;
+    margin-right: 4.7rem;
 }
 .addInterestHeading{
     text-align: center;
@@ -109,9 +113,7 @@
 }
 .skip{
     margin-top: 26px;
-}
-.continueUpload{
-    display: none;
+    cursor: pointer;
 }
 .interestDescription{
     margin-top: 24px;

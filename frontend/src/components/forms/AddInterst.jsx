@@ -1,9 +1,15 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styles from './forms.module.css'
 import AddCards from './addCard/AddCards'
 import Button from '../buttons/Button'
+import CompletedRegistration from './CompletedRegistration'
 
-const AddInterst = () => {
+const AddInterst = ({setCount,count, setCompleted}) => {
+  const [click, setClick] = useState(false)
+
+  const handleClick = () =>{
+    setClick(true)
+  }
   return (
     <div className={styles.formsStep4}>
       <h2 className={styles.addInterestHeading}>Let’s get started by picking some interests</h2>
@@ -14,8 +20,10 @@ const AddInterst = () => {
         <AddCards color='orange' text='Music'/>
         <AddCards color='blue' text='Reading'/>
       </div>
-        <Button variant='primary' type='continue-add-btn'>Continue</Button>
+
+        <Button variant='primary' type='continue-add-btn'  page='signup' done="true" setCount={setCount} count={count} setCompleted={setCompleted}>Continue</Button>
     </div>
+    
   )
 }
 
