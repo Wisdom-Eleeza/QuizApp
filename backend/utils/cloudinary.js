@@ -10,17 +10,14 @@ cloudinary.config({
   api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
-uploadToCloudinary = (path, folder) => {
-  return cloudinary.uploader
-    .upload(path, {
-      folder,
-    })
-    .then((data) => {
-      return { url: data.url, public_id: data.public_id };
-    })
-    .catch((error) => {
-      console.error(error);
-    });
+const uploadToCloudinary = async (path, QuizMasterImageUpload) => {
+  try {
+    const data = await cloudinary.uploader.upload(path, { QuizMasterImageUpload });
+    return { url: data.url, public_id: data.public_id };
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
 };
 
 module.exports = uploadToCloudinary;

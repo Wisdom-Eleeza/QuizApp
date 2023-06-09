@@ -4,7 +4,7 @@ const cors = require("cors");
 const dotenv = require("dotenv");
 const app = express();
 const registerRoutes = require("./routes/registerRoutes");
-const imageRoutes = require("./routes/registerRoutes");
+// const imageRoutes = require("./routes/registerRoutes");
 
 dotenv.config();
 const port = process.env.PORT || 5000;
@@ -15,7 +15,7 @@ app.use(express.urlencoded({ extended: false }));
 
 // Routes middleware
 app.use("/api/registerUser", registerRoutes);
-app.use("/api/upload", upload.single("image"), imageRoutes);
+// app.use("/api/upload", upload.single("image"), imageRoutes);
 
 app.listen(port, () => {
   console.log(`Server listening on http://localhost:${port}`);

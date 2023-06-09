@@ -1,15 +1,5 @@
 const mongoose = require("mongoose");
-// const Joi = require("joi");
 
-// const imageSchema = new mongoose.Schema({
-//   publicId: {
-//     type: String
-//   },
-//   imageUrl: {
-//     name: String,
-//     filePath: String,
-//   },
-// });
 
 const registerUserSchema = new mongoose.Schema({
   name: {
@@ -30,8 +20,8 @@ const registerUserSchema = new mongoose.Schema({
     maxlength: 255,
   },
   profileImage: {
-    
-  },
+    type: String,
+  }
 });
 
 const registerModel = mongoose.model("User", registerUserSchema);
