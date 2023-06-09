@@ -8,4 +8,13 @@ cloudinary.config({
   api_secret: CLOUDINARY_API_SECRET,
 });
 
+// Configuring cloudinary storage for multer
+const storage = new cloudinaryStorage({
+    cloudinary: cloudinary,
+    params: {
+        folder: QuizMasterProfile,
+        allowed_format: ['jpg', 'png', 'jpeg',]
+    }
+})
+
 
