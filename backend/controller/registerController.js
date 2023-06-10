@@ -1,14 +1,8 @@
-const { registerModel, imageModel } = require("../models/registerModel");
-// const imageModel = require("../models/imageModel");
-const mongoose = require("mongoose");
+const { registerModel } = require("../models/registerModel");
 const bcrypt = require("bcrypt");
 const jwt = require('jsonwebtoken')
-// const upload = require("../middleware/uploadMiddleware");
 const validateRegisterUser = require("../middleware/validateUser");
 const connectDB = require("../config/db");
-const express = require("express");
-const router = express.Router();
-// const register = require('../models/imageModel')
 
 connectDB(); //connect to the database
 
