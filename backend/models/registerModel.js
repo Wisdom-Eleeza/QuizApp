@@ -23,11 +23,16 @@ const registerUserSchema = new mongoose.Schema(
     profileImage: {
       type: String,
     },
+    interests: [
+      {
+        type: String,
+        maxlength: 8,
+      },
+    ],
   },
   {
     timestamps: true,
   }
 );
-
 const registerModel = mongoose.model("User", registerUserSchema);
 module.exports = { registerModel }; 
