@@ -9,5 +9,4 @@ function validateRegisterUser(user) {
   return schema.validate(user);
 }
 
-module.exports = validateRegisterUser
-
+module.exports = validateRegisterUser;

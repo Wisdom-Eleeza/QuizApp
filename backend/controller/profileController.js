@@ -1,5 +1,5 @@
-const profileModel = require('../models/profile')
+// const profileModel = require('../models/profile')
 
-const addProfileImage = async () => {
-    
-}
+// const addProfileImage = async () => {
+
+// }
