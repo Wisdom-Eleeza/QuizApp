@@ -4,6 +4,9 @@ const dotenv = require("dotenv");
 const app = express();
 const registerRoutes = require("./routes/registerRoutes");
 const messageRoutes = require("./routes/messageRoutes");
+const connectDB = require("./config/db")
+
+connectDB() //connection to mongodb database
 
 dotenv.config();
 const port = process.env.PORT || 5000;
