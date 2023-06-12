@@ -4,11 +4,14 @@ import App from './App.jsx'
 import './index.css'
 import { store } from './app/store.js'
 import { Provider } from 'react-redux'
+import { GoogleOAuthProvider } from '@react-oauth/google'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
+  <GoogleOAuthProvider>
+    <React.StrictMode>
     <Provider store={store}>
       <App />
     </Provider>
-  </React.StrictMode>,
+  </React.StrictMode>
+  </GoogleOAuthProvider>,
 )

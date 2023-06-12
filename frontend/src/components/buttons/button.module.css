@@ -35,9 +35,7 @@
   .large-border-radius {
     border-radius: 1.438rem;
   }
-  .curvy{
-    border-radius: 6.25rem;
-  }
+  
   .medium {
     padding: 1.344rem 1.563rem;
     justify-content: center;
@@ -98,10 +96,7 @@
     width: 7.25rem;
     height: 40px;
   }
-  .upload-btn {
-    width: 6.438rem;
-    height: 40px;
-  }
+  
   .schedule-time {
     padding: 0.656rem 1.094rem;
   }
