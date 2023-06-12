@@ -7,9 +7,10 @@ const validateRegisterUser = require("../middleware/validateUser");
 // @route POST /api/registerUser
 // @access Public
 const registerUser = async (req, res) => {
-  const { error } = validateRegisterUser(req.body);
-  if (error) return res.status(400).send(error.details[0].message);
   try {
+    const { error } = validateRegisterUser(req.body);
+    if (error) return res.status(400).send(error.details[0].message);
+
     let user = await registerModel.findOne({ email: req.body.email });
     if (user) {
       return res.status(400).send("User already registered");

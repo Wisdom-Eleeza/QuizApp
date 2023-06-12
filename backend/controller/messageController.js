@@ -21,4 +21,7 @@ const sendMessage = async (req, res) => {
   }
 };
 
-module.exports = { sendMessage };
+// module.exports = { sendMessage };
+module.exports = {
+  sendMessage: [validateMessage, sendMessage], // Apply validateMessage middleware before calling sendMessage
+};
