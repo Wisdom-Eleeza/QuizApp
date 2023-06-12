@@ -21,8 +21,10 @@ const registerUserSchema = new mongoose.Schema(
       maxlength: 255,
     },
     profileImage: {
-      type: String,
+      type: Schema.Types.ObjectId,
+      ref: "User",
     },
+
     interests: [
       {
         type: String,
@@ -35,4 +37,4 @@ const registerUserSchema = new mongoose.Schema(
   }
 );
 const registerModel = mongoose.model("User", registerUserSchema);
-module.exports = { registerModel }; 
+module.exports = { registerModel };
