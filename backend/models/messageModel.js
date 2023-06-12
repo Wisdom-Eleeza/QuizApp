@@ -1,3 +1,4 @@
+const { string } = require("joi");
 const mongoose = require("mongoose");
 
 const messageSchema = new mongoose.Schema({
@@ -6,6 +7,10 @@ const messageSchema = new mongoose.Schema({
     required: true,
   },
   email: {
+    type: String,
+    required: true,
+  },
+  subject: {
     type: String,
     required: true,
   },
