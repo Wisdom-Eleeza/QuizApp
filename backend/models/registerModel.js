@@ -21,16 +21,14 @@ const registerUserSchema = new mongoose.Schema(
       maxlength: 255,
     },
     profileImage: {
-      type: Schema.Types.ObjectId,
-      ref: "User",
+      type: String,
     },
-
-    interests: [
-      {
-        type: String,
-        maxlength: 8,
-      },
-    ],
+    interests: {
+      type: [String],
+    },
+    addInterest: {
+      type: [String],
+    },
   },
   {
     timestamps: true,

@@ -2,8 +2,6 @@ const validateMessage = require("../middleware/validateMessage");
 const messageModel = require("../models/messageModel");
 
 const sendMessage = async (req, res) => {
-  // const { error } = validateMessage(req.body);
-  // if (error) return res.status(400).send(error.details[0].message);
   try {
     const { name, email, phoneNumber, subject, message } = req.body;
 
