@@ -8,7 +8,7 @@ import { useGoogleLogin } from '@react-oauth/google'
 import axios from 'axios'
 import { useDispatch, useSelector } from 'react-redux'
 import { increaseCount } from '../../../features/stepperSlice'
-// import {coun}
+import { setUserDetails, registerUser } from '../../../features/authSlice'
 
 const Register = () => {
   const [username, setUsername] = useState('')
@@ -74,10 +74,13 @@ const Register = () => {
     return Object.keys(newErrors).length === 0
   }
 
-  const handleClick = () => {
+  const handleClick = async () => {
     if (validateForm()) {
-      dispatch(increaseCount())
-      console.log(count)
+      const data = { username, email, password }
+      dispatch(setUserDetails(data))
+      dispatch(registerUser('hello'))
+      console.log(data)
+      // dispatch(increaseCount())
     }
   }
 
@@ -163,7 +166,9 @@ const Register = () => {
 
       <div className={styles.authenticationAlt}>
         <p>Already have an account?</p>
-        <NavLink className={styles.AltNavigate} to='/login'>Log In</NavLink>
+        <NavLink className={styles.AltNavigate} to="/login">
+          Log In
+        </NavLink>
       </div>
     </div>
   )

@@ -1,5 +1,5 @@
 import axios from "axios";
 const Api = axios.create({
-    baseURL: ''
+    baseURL: 'https://quiz-master.onrender.com/api'
 });
 export default Api;
