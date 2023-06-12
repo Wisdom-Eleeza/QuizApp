@@ -1,15 +1,8 @@
 const express = require("express");
 const { registerUser } = require("../controller/registerController");
+const validateRegisterUser = require("../middleware/validateUser");
 const router = express.Router();
 
-// router.post("/", registerUser);
-router.post("/", async (req, res) => {
-    try {
-      await registerUser(req, res);
-    } catch (error) {
-      console.error(error);
-      res.status(500).send("Internal Server Error");
-    }
-  });
+router.post("/", validateRegisterUser, registerUser);
 
 module.exports = router;

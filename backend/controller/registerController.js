@@ -2,37 +2,30 @@ const { registerModel } = require("../models/registerModel");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const validateRegisterUser = require("../middleware/validateUser");
-const connectDB = require("../config/db");
-
-connectDB(); // connect to the database
 
 // @desc Register new user
 // @route POST /api/registerUser
 // @access Public
 const registerUser = async (req, res) => {
   try {
-    const { error } = validateRegisterUser(req.body); // validateUser is to validate only user registration
+    const { error } = validateRegisterUser(req.body);
     if (error) return res.status(400).send(error.details[0].message);
 
     let user = await registerModel.findOne({ email: req.body.email });
     if (user) {
-      // if user already in the database, send BadRequest(400)
       return res.status(400).send("User already registered");
     }
 
-    // if not in the database, create new user
     user = new registerModel({
       name: req.body.name,
       email: req.body.email,
       password: req.body.password,
     });
 
-    // hashed the user password
     const salt = await bcrypt.genSalt(10);
     user.password = await bcrypt.hash(user.password, salt);
     await user.save();
 
-    // Generate JWT token for the user which expires in 1 day
     const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET, {
       expiresIn: "1d",
     });
@@ -50,4 +43,3 @@ const registerUser = async (req, res) => {
 };
 
 module.exports = { registerUser };
-

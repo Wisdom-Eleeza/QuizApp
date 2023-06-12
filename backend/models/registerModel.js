@@ -5,7 +5,7 @@ const registerUserSchema = new mongoose.Schema(
     name: {
       type: String,
       required: [true, "Name is required"],
-      minlength: 10,
+      minlength: 5,
       maxlength: 255,
     },
     email: {
@@ -17,7 +17,7 @@ const registerUserSchema = new mongoose.Schema(
     password: {
       type: String,
       required: [true, "Password is a required field"],
-      minlength: 5,
+      minlength: 10,
       maxlength: 255,
     },
     profileImage: {
@@ -35,4 +35,4 @@ const registerUserSchema = new mongoose.Schema(
   }
 );
 const registerModel = mongoose.model("User", registerUserSchema);
-module.exports = { registerModel };
+module.exports = registerModel;
