@@ -5,11 +5,6 @@ const app = express();
 const registerRoutes = require("./routes/registerRoutes");
 const messageRoutes = require("./routes/messageRoutes");
 
-process.on('unhandledRejection', (err) => {
-  console.error('Unhandled promise rejection:', err);
-  process.exit(1);
-});
-
 dotenv.config();
 const port = process.env.PORT || 5000;
 
