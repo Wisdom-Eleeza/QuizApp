@@ -1,18 +1,51 @@
-import React, { useState } from 'react'
-import personIcon from '../../../assets/Desktop View/Icons/person.png'
-import styles from './addPhoto.module.css'
-import { useDispatch } from 'react-redux'
-import { increaseCount } from '../../../features/stepperSlice'
+import React, { useState } from 'react';
+import personIcon from '../../../assets/Desktop View/Icons/person.png';
+import styles from './addPhoto.module.css';
+import { useDispatch } from 'react-redux';
+import { increaseCount } from '../../../features/stepperSlice';
+import axios from 'axios';
 
 const AddPhoto = () => {
-  const [getImage, setGetImage] = useState(null)
-  const dispatch = useDispatch()
+  const [getImage, setGetImage] = useState(null);
+  const dispatch = useDispatch();
 
   const handleClick = () => {
     if (getImage) {
-      dispatch(increaseCount())
+      ;
     }
-  }
+  };
+
+  const handleImageUrl = async (file) => {
+    try {
+      const formData = new FormData();
+      formData.append('file', file);
+      formData.append('upload_preset', 'obwnqchq'); // Replace with your actual upload preset
+
+      const response = await axios.post(
+        'https://api.cloudinary.com/v1_1/dleyquc6n/image/upload',
+        formData,
+        {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        }
+      );
+
+      const secureUrl = response.data.secure_url;
+      setGetImage(secureUrl);
+      
+    } catch (error) {
+      console.error('Error uploading image:', error);
+    }
+  };
+
+  console.log(getImage);
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    setGetImage(file);
+    handleImageUrl(file);
+  };
+
   return (
     <div className={styles.formsStep2}>
       <h2 className={styles.heading}>Add Photo</h2>
@@ -20,11 +53,15 @@ const AddPhoto = () => {
         Add a photo so other members know who you are
       </p>
       <label
-        className={getImage ? styles.photoContainer : styles.photoUploadWrapper}
-        htmlFor="photo-upload">
+        className={
+          getImage ? styles.photoContainer : styles.photoUploadWrapper
+        }
+        htmlFor="photo-upload"
+      >
         <img
-          src={getImage ? URL.createObjectURL(getImage) : personIcon}
+          src={getImage || personIcon}
           className={styles.personIcon}
+          alt="User Photo"
         />
       </label>
       <input
@@ -32,19 +69,31 @@ const AddPhoto = () => {
         accept="image/*"
         className={styles.uploadImg}
         id="photo-upload"
-        onChange={e => setGetImage(e.target.files[0])}
+        onChange={handleImageChange}
         hidden
       />
       <div className={styles.upload}>
-        <label className={styles.uploadBtn} onClick={handleClick} htmlFor={getImage ? '' : 'photo-upload'}>
-          {getImage ? 'Continue' : 'Upload a photo'}
-        </label>
-        <p className={styles.skip} onClick={() => dispatch(increaseCount())}>
-          Skip
-        </p>
+        {!getImage ? (
+          <label
+            className={styles.uploadBtn}
+            onClick={handleClick}
+            htmlFor={getImage ? '' : 'photo-upload'}
+          >
+            Upload a photo
+          </label>
+        ) : (
+          <button className={styles.uploadBtn} onClick={() => dispatch(increaseCount())}>
+            Continue
+          </button>
+        )}
+        {!getImage && (
+          <p className={styles.skip} onClick={() => dispatch(increaseCount())}>
+            Skip
+          </p>
+        )}
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default AddPhoto
+export default AddPhoto;

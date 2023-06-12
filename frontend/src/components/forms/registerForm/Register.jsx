@@ -163,7 +163,7 @@ const Register = () => {
 
       <div className={styles.authenticationAlt}>
         <p>Already have an account?</p>
-        <NavLink className={styles.AltNavigate}>Log In</NavLink>
+        <NavLink className={styles.AltNavigate} to='/login'>Log In</NavLink>
       </div>
     </div>
   )

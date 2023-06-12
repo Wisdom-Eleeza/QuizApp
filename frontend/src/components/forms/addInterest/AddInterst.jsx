@@ -13,9 +13,10 @@ const AddInterst = ({ setCompleted }) => {
     dispatch(increaseCount())
     setClick(true)
   }
+
   return (
     <div className={styles.formsStep4}>
-      <h2 className={styles.addInterestHeading}>
+      <h2 className={styles.heading}>
         Let’s get started by picking some interests
       </h2>
       <p className={styles.addInterestDescription}>
@@ -28,7 +29,7 @@ const AddInterst = ({ setCompleted }) => {
         <AddCards color="blue" text="Reading" />
       </div>
 
-      <button onClick={handleClick}>Continue</button>
+      <button onClick={handleClick} className={styles.continueBtn}>Continue</button>
     </div>
   )
 }

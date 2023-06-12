@@ -11,7 +11,10 @@ const stepperSlice = createSlice({
     increaseCount: state => {
       state.count = state.count += 1
     },
+    decreaseCount : state => {
+      state.count > 1 ? state.count -= 1 : state.count = 1;
+    }
   },
 })
-export const { increaseCount } = stepperSlice.actions
+export const { increaseCount, decreaseCount } = stepperSlice.actions
 export default stepperSlice.reducer

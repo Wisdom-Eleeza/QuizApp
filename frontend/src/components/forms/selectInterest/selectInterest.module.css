@@ -9,7 +9,6 @@
   font-weight: 600;
   line-height: 39px;
   letter-spacing: 0.005em;
-  text-align: left;
   margin-bottom: 24px;
 }
 .interestDescription {
@@ -35,13 +34,20 @@
   justify-content: center;
   align-items: center;
 }
-.addBtn:hover {
+.btnSelected {
   color: #ffffff;
   background: linear-gradient(0deg, #0267ff, #0267ff),
     linear-gradient(103.38deg, #1275d0 26.38%, rgba(185, 38, 188, 0.46) 78.13%);
+    border-radius: 6.25rem;
+    height: 36px;
+    width: 14.5rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
 }
-.addBtn:hover img {
-  content: url('../../../assets/Desktop\ View/Icons/Add.png');
+.btnSelected .addIcon{
+  color: #ffffff;
 }
 .btn2,
 .btn3,
