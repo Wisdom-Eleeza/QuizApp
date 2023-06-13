@@ -5,7 +5,8 @@ const subscribeSchema = new mongoose.Schema({
     email: String
 });
 
-module.exports = subscribeSchema;
+const subscribed = mongoose.model("Subscribe", subscribeSchema);
+module.exports = subscribed;
 
 
 
