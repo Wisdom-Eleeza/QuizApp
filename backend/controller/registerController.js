@@ -1,8 +1,7 @@
-const validateRegisterUser = require("../middleware/validateUser");
+// const validateRegisterUser = require("../middleware/validateUser");
 const registerModel = require("../models/registerModel");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const Joi = require("joi");
 
 // @desc Register new user
 // @route POST /api/registerUser

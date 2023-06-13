@@ -15,7 +15,7 @@ function subscribe(req, res) {
     email: Joi.string().min(5).max(255).required().email()
   });
 
-  const { error } = schema.validate(req.email);
+  const { error } = schema.validate(req.body.email);
   if (error) {
     error.details.map((detail) => detail.message);
     res.status().json({ success: true, message: error.details[0].message });
@@ -23,3 +23,5 @@ function subscribe(req, res) {
     res.status().json({ success: true, message: "Email submitted successfully" });
   }
 }
+
+module.exports = subscribe
