@@ -3,11 +3,11 @@ import Api from '../components/forms/services/api'
 
 export const registerUser = createAsyncThunk(
   'register',
-  async (msg, thunkAPI) => {
+  async (url, thunkAPI) => {
     try {
-      const state = thunkAPI.getState()
+      const {username, email, password} = thunkAPI.getState().authenticator
       console.log(state)
-      // const response = await Api.post('/registerUser')
+      await Api.post(url, {username, email, password})
     } catch (error) {
       console.log(error)
     }
@@ -51,7 +51,7 @@ const authSlice = createSlice({
       )
       .addMatcher(
         (registerUser.fulfilled,
-        state => {
+        (state) => {
           state.isLoading = false
         })
       )

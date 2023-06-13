@@ -1,6 +1,7 @@
 import React from 'react'
 import celebrate from '../../assets/Desktop View/Images/Frame.png'
 import styles from './forms.module.css'
+import { NavLink } from 'react-router-dom'
 
 const CompletedRegistration = () => {
   return (
@@ -8,7 +9,10 @@ const CompletedRegistration = () => {
       <h2 className={styles.heading} >Woohoo!</h2>
       <p className={styles.completedDescription}>Hey there! Your registration is complete, get excited for the ultimate quiz experience of your life. Let's do this!</p>
       <img src={celebrate} className={styles.img}/>
-      <button className={styles.submitBtn} type='submit'>Continue</button>
+      <NavLink to='/'>
+      <button className={styles.submitBtn}>Continue</button>
+      </NavLink>
+      
     </div>
   )
 }

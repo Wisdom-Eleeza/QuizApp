@@ -36,25 +36,25 @@ const Signup = () => {
 
   const handleSubmit =async  e => {
     e.preventDefault()
-    useEffect(() => {
-      const fetchData = async ()=>{
-        try {
-          const response = await Api.post('', {
-            headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify(data)
-        });
-          if(response){
-            console.log(response)
-          }
-        } catch (error) {
-          console.log(error)
-        }
-      }
-      fetchData()
+    // useEffect(() => {
+    //   const fetchData = async ()=>{
+    //     try {
+    //       const response = await Api.post('', {
+    //         headers: {
+    //         'Content-Type': 'application/json'
+    //       },
+    //       body: JSON.stringify(data)
+    //     });
+    //       if(response){
+    //         console.log(response)
+    //       }
+    //     } catch (error) {
+    //       console.log(error)
+    //     }
+    //   }
+    //   fetchData()
     
-    }, [response])
+    // }, [response])
     
   }
 
@@ -62,7 +62,8 @@ const Signup = () => {
     <form className={styles.forms} onSubmit={handleSubmit}>
       {!completed && (
         <div className={styles.pageCounter} onClick={()=> dispatch(decreaseCount())}>
-          <p className={styles.back}><IoMdArrowRoundBack className={styles.backArrow}/> <span>Back</span></p>
+          {count > 1 && <p className={styles.back}><IoMdArrowRoundBack className={styles.backArrow}/> <span>Back</span></p>}
+          
           <p className={styles.counter}>
             Step {count}
             <span> of 4</span>

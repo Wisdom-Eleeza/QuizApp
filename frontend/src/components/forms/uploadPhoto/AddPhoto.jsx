@@ -4,14 +4,22 @@ import styles from './addPhoto.module.css';
 import { useDispatch } from 'react-redux';
 import { increaseCount } from '../../../features/stepperSlice';
 import axios from 'axios';
+import Api from '../services/api';
+import Cookies from 'js-cookie';
+import { toast } from 'react-toastify';
 
 const AddPhoto = () => {
   const [getImage, setGetImage] = useState(null);
   const dispatch = useDispatch();
+  const userId = Cookies.get('userId')
 
-  const handleClick = () => {
-    if (getImage) {
-      ;
+  const handleClick = async () => {
+    const response = await Api.patch(`registerUser/${userId}`, {profileImage: getImage})
+    if(response.status === 200){
+      toast.success('Profile image updated successfully')
+      dispatch(increaseCount())
+    }else{
+      toast.warn('unable to update profile')
     }
   };
 
@@ -76,13 +84,13 @@ const AddPhoto = () => {
         {!getImage ? (
           <label
             className={styles.uploadBtn}
-            onClick={handleClick}
+            // onClick={handleClick}
             htmlFor={getImage ? '' : 'photo-upload'}
           >
             Upload a photo
           </label>
         ) : (
-          <button className={styles.uploadBtn} onClick={() => dispatch(increaseCount())}>
+          <button className={styles.uploadBtn} onClick={handleClick}>
             Continue
           </button>
         )}

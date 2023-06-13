@@ -1,14 +1,18 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import styles from './addCard.module.css'
 import {BiCheck} from 'react-icons/bi'
 
-const AddCards = ({text, color}) => {
+const AddCards = ({text, color, onSubmitData}) => {
   const [addedInterest, setAddedInterest] = useState([])
   const handleAddInterest = (value) =>{
-    setAddedInterest(prev => [...prev, value])
+    setAddedInterest((prev) => [...prev, value])
     console.log(addedInterest)
-  }
-  const btnText = ((text === 'Gaming' && addedInterest.includes('Gaming')) ? 'Added' : (text === 'Fashion' && addedInterest.includes('Fashion')) ? 'Added':  (text === 'Music' && addedInterest.includes('Music')) ? 'Added' :   (text === 'Reading' && addedInterest.includes('Reading')) ? 'Added' : 'Add')
+  };
+  const btnText = ((text === 'Gaming' && addedInterest.includes('Gaming')) ? 'Added' : (text === 'Fashion' && addedInterest.includes('Fashion')) ? 'Added':  (text === 'Music' && addedInterest.includes('Music')) ? 'Added' :   (text === 'Reading' && addedInterest.includes('Reading')) ? 'Added' : 'Add');
+
+  useEffect(() => {
+    onSubmitData(addedInterest);
+  }, [addedInterest, onSubmitData]);
 
   return (
     <div className={styles.addCard}>

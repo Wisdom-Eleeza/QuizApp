@@ -3,18 +3,33 @@ import styles from './selectInterest.module.css'
 import { useDispatch } from 'react-redux'
 import { increaseCount } from '../../../features/stepperSlice'
 import { GrFormAdd } from 'react-icons/gr'
+import { toast } from 'react-toastify'
+import Api from '../services/api'
+import Cookies from 'js-cookie'
 
 const SelectInterest = () => {
   const [social, setSocial] = useState('')
   const [personal, setPersonal] = useState('')
   const [entertainment, setEntertainment] = useState('')
   const [rewards, setRewards] = useState('')
-  const [selectectedInterest, setSelectectedInterest] = useState([])
+  const [selectedInterest, setSelectectedInterest] = useState([])
+
+  const userId = Cookies.get('userId')
 
   const dispatch = useDispatch()
 
   const handleSelectedInterest = value => {
     setSelectectedInterest(prev => [...prev, value])
+  };
+  const handleClick = async () => {
+    const response = await Api.patch(`registerUser/${userId}`, {interest: selectedInterest})
+    const msg = response.data.message
+    if(response.data.success === true){
+      toast.success(msg)
+      dispatch(increaseCount())
+    }else{
+      toast.warn(msg)
+    }
   }
 
   return (
@@ -27,7 +42,7 @@ const SelectInterest = () => {
       <div className={styles.btn1}>
         <button
           className={
-            selectectedInterest.includes('Social Interaction')
+            selectedInterest.includes('Social Interaction')
               ? styles.btnSelected
               : styles.addBtn
           }
@@ -40,7 +55,7 @@ const SelectInterest = () => {
       <div className={styles.btn2}>
         <button
           className={
-            selectectedInterest.includes('Personal development')
+            selectedInterest.includes('Personal development')
               ? styles.btnSelected
               : styles.addBtn
           }
@@ -53,7 +68,7 @@ const SelectInterest = () => {
       <div className={styles.btn3}>
         <button
           className={
-            selectectedInterest.includes('Entertainment and Fun')
+            selectedInterest.includes('Entertainment and Fun')
               ? styles.btnSelected
               : styles.addBtn
           }
@@ -66,7 +81,7 @@ const SelectInterest = () => {
       <div className={styles.btn4}>
         <button
           className={
-            selectectedInterest.includes('Rewards and recognition')
+            selectedInterest.includes('Rewards and recognition')
               ? styles.btnSelected
               : styles.addBtn
           }
@@ -79,7 +94,7 @@ const SelectInterest = () => {
       <div className={styles.continueInterest}>
         <button
           className={styles.continueBtn}
-          onClick={() => dispatch(increaseCount())}>
+          onClick={handleClick}>
           Continue
         </button>
       </div>

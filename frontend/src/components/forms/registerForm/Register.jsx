@@ -1,20 +1,22 @@
-/* eslint-disable react/no-unescaped-entities */
 import React, { useState, useEffect } from 'react'
-import Button from '../../buttons/Button'
 import styles from './register.module.css'
 import { NavLink } from 'react-router-dom'
 import google from '../../../assets/Desktop View/Icons/Google logo.png'
 import { useGoogleLogin } from '@react-oauth/google'
-import axios from 'axios'
 import { useDispatch, useSelector } from 'react-redux'
 import { increaseCount } from '../../../features/stepperSlice'
-import { setUserDetails, registerUser } from '../../../features/authSlice'
+import Api from '../services/api'
+import { toast } from 'react-toastify'
+import { RotatingLines } from 'react-loader-spinner'
+import { RotateLoader } from 'react-spinners'
+import Cookies from 'js-cookie'
 
 const Register = () => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [email, setEmail] = useState('')
   const [errors, setErrors] = useState({})
+  const [loading, setLoading] = useState(true)
 
   const dispatch = useDispatch()
 
@@ -76,20 +78,33 @@ const Register = () => {
 
   const handleClick = async () => {
     if (validateForm()) {
-      const data = { username, email, password }
-      dispatch(setUserDetails(data))
-      dispatch(registerUser('hello'))
-      console.log(data)
-      // dispatch(increaseCount())
+      try {
+        const data = { name: username, email, password }
+      setLoading(!loading)
+      const response = await Api.post('registerUser', data)
+      console.log(response);
+      if(response.data.success === true){
+        Cookies.set('userId', response.data.user._id)
+        toast.success('account created successfully')
+        setTimeout(() => {
+          dispatch(increaseCount())
+        }, 4000);
+      }
+      setTimeout(() => {
+        setLoading(true)
+      }, 5000);
+        
+      } catch (error) {
+        const err = error.response.data.message
+        console.log(err)
+        toast.warn(err)
+        setTimeout(() => {
+          setLoading(true)
+        }, 5000);
+      }
+      
     }
   }
-
-  // const responseMessage = response => {
-  //   console.log(response)
-  // }
-  // const errorMessage = error => {
-  //   console.log(error)
-  // }
 
   return (
     <div className={styles.formsStep1}>
@@ -144,6 +159,7 @@ const Register = () => {
             onBlur={e => (e.target.placeholder = `password`)}
             onFocus={e => (e.target.placeholder = `Enter a valid password`)}
             className={styles.input}
+            minLength={10}
           />
         </div>
         {errors.password && (
@@ -152,9 +168,14 @@ const Register = () => {
       </div>
 
       <div className={styles.createAccountBtn}>
+        {!loading ? (
+        <RotatingLines strokeColor="grey" strokeWidth="4" animationDuration="0.95" width="40" visible={true}/>
+        ): (
         <button onClick={handleClick} className={styles.createBtn}>
           Create Account
         </button>
+        )}
+        
       </div>
 
       <div className={styles.googleContainer}>
