@@ -14,5 +14,4 @@ async function editUser(req, res) {
     res.status(500).json({success: false, message: 'Something went wrong'})
    }
 }
-
 module.exports = { editUser };

@@ -28,11 +28,14 @@ const registerUser = async (req, res, next) => {
       expiresIn: "1d",
     });
 
-    res.status(201).send({
-      _id: user._id,
+    res.status(201).json({
+      success: true,
+      user: {
+        _id: user._id,
       name: user.name,
       email: user.email,
       token: token,
+      }
     });
   } catch (error) {
     res.status(500).json({success: false, message: "Something went wrong"})
