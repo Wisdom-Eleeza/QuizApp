@@ -11,7 +11,7 @@ async function editUser(req, res) {
       if(!updatedUser) return res.status(404).json({success: false, message: 'User does not exist'})
       res.status(200).json({success: true, message: 'User updated successfully' })
    } catch (error) {
-    res.status(500).json('Something went wrong')
+    res.status(500).json({success: false, message: 'Something went wrong'})
    }
 }
 
