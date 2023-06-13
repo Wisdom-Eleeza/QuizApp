@@ -59,8 +59,8 @@ const Joi = require("joi");
 // @access Public
 const registerUser = async (req, res, next) => {
   try {
-    const { error } = validateRegisterUser(req.body);
-    if (error) return res.status(400).send(error.details[0].message);
+    // const error = validateRegisterUser(req.body);
+    // if (error) return res.status(400).send(error.details[0].message);
 
     let user = await registerModel.findOne({ email: req.body.email });
     if (user) {
@@ -88,11 +88,11 @@ const registerUser = async (req, res, next) => {
       token: token,
     });
   } catch (error) {
-    console.error(error);
-    if (error.name === "ValidationError") {
-      const validationError = error.details.map((detail) => detail.message);
-      console.log('Validation errors:', validationError);
-    }
+    // console.error(error);
+    // if (error.name === "ValidationError") {
+    //   const validationError = error.details.map((detail) => detail.message);
+    //   console.log('Validation errors:', validationError);
+    // }
     res.status(500).send("Internal Server Error");
   }
 };

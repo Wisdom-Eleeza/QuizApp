@@ -8,13 +8,15 @@ function validateRegisterUser(req, res, next) {
   });
   // const { error } = validateRegisterUser(req.body);
   // if (error) return res.status(400).send(error.details[0].message);
+  // console.log(next);
   const { error } = schema.validate(req.body);
-  if (error && error.name === "ValidationError") {
+  console.log("error:", error);
+  if (error) {
     const validationErrors = error.details.map((detail) => detail.message);
-    console.log('Validation errors:', validationErrors)
+    console.log("Validation errors:", validationErrors);
     return res.status(400).send(error.details[0].message);
   } else {
-    // return next();
+    return next();
   }
 }
 
