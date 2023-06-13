@@ -14,12 +14,6 @@ const AddInterst = ({ setCompleted }) => {
   const dispatch = useDispatch()
   const userId = Cookies.get('userId')
 
-  
-  const handleAddedCards = (addedInterest) =>{
-    console.log(addedInterest)
-    submitData(addedInterest)
-  };
-
   const submitData = async (addedInterest) => {
     setCompleted(true)
     setClick(true)
@@ -33,6 +27,10 @@ const AddInterst = ({ setCompleted }) => {
       toast.warn(msg)
     }
   }
+
+  const handleAddedCards = (addedInterest) =>{
+    console.log(addedInterest)
+  };
 
   const handleClick = ()=>{
     handleAddedCards();

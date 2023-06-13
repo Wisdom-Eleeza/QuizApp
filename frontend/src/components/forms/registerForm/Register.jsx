@@ -2,13 +2,11 @@ import React, { useState, useEffect } from 'react'
 import styles from './register.module.css'
 import { NavLink } from 'react-router-dom'
 import google from '../../../assets/Desktop View/Icons/Google logo.png'
-import { useGoogleLogin } from '@react-oauth/google'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch} from 'react-redux'
 import { increaseCount } from '../../../features/stepperSlice'
 import Api from '../services/api'
 import { toast } from 'react-toastify'
 import { RotatingLines } from 'react-loader-spinner'
-import { RotateLoader } from 'react-spinners'
 import Cookies from 'js-cookie'
 
 const Register = () => {
@@ -19,35 +17,6 @@ const Register = () => {
   const [loading, setLoading] = useState(true)
 
   const dispatch = useDispatch()
-
-  //google auth
-  const [user, setUser] = useState([])
-  const [profile, setProfile] = useState([])
-  const { count } = useSelector(store => store.counter)
-
-  // const login = useGoogleLogin({
-  //   onSuccess: codeResponse => setUser(codeResponse),
-  //   onError: error => console.log('Login Failed:', error),
-  // })
-
-  // useEffect(() => {
-  //   if (user) {
-  //     axios
-  //       .get(
-  //         `https://www.googleapis.com/oauth2/v1/userinfo?access_token=${user.access_token}`,
-  //         {
-  //           headers: {
-  //             Authorization: `Bearer ${user.access_token}`,
-  //             Accept: 'application/json',
-  //           },
-  //         }
-  //       )
-  //       .then(res => {
-  //         setProfile(res.data)
-  //       })
-  //       .catch(err => console.log(err))
-  //   }
-  // }, [user])
 
   const validateForm = () => {
     const newErrors = {}
@@ -69,12 +38,9 @@ const Register = () => {
     } else if (password.length < 8) {
       newErrors.password = 'Password should contain atleast 8 characters'
     }
-
     setErrors(newErrors)
-
-    // Return true if there are no errors
     return Object.keys(newErrors).length === 0
-  }
+  };
 
   const handleClick = async () => {
     if (validateForm()) {
@@ -104,7 +70,7 @@ const Register = () => {
       }
       
     }
-  }
+  };
 
   return (
     <div className={styles.formsStep1}>

@@ -7,6 +7,7 @@ import axios from 'axios';
 import Api from '../services/api';
 import Cookies from 'js-cookie';
 import { toast } from 'react-toastify';
+import { RotatingLines } from 'react-loader-spinner';
 
 const AddPhoto = () => {
   const [getImage, setGetImage] = useState(null);
@@ -71,6 +72,7 @@ const AddPhoto = () => {
           className={styles.personIcon}
           alt="User Photo"
         />
+        
       </label>
       <input
         type="file"
@@ -84,7 +86,6 @@ const AddPhoto = () => {
         {!getImage ? (
           <label
             className={styles.uploadBtn}
-            // onClick={handleClick}
             htmlFor={getImage ? '' : 'photo-upload'}
           >
             Upload a photo

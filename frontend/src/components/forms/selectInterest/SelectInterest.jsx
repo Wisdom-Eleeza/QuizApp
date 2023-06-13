@@ -8,10 +8,6 @@ import Api from '../services/api'
 import Cookies from 'js-cookie'
 
 const SelectInterest = () => {
-  const [social, setSocial] = useState('')
-  const [personal, setPersonal] = useState('')
-  const [entertainment, setEntertainment] = useState('')
-  const [rewards, setRewards] = useState('')
   const [selectedInterest, setSelectectedInterest] = useState([])
 
   const userId = Cookies.get('userId')

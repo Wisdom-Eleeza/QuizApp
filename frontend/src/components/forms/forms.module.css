@@ -11,6 +11,10 @@
   margin-bottom: 144px;
   width: 100%;
 }
+.completedRegistration{
+  margin-top: 70px;
+  width: 80%;
+}
 .pageCounter {
   display: flex;
   justify-content: space-between;
