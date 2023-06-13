@@ -6,10 +6,11 @@ const validateRegisterUser = require("../middleware/validateUser");
 // @desc Register new user
 // @route POST /api/registerUser
 // @access Public
-const registerUser = async (req, res) => {
+const registerUser = async (req, res, next) => {
+  console.log('try');
   try {
-    const { error } = validateRegisterUser(req.body);
-    if (error) return res.status(400).send(error.details[0].message);
+    // const { error } = validateRegisterUser(req.body);
+    // if (error) return res.status(400).send(error.details[0].message);
 
     let user = await registerModel.findOne({ email: req.body.email });
     if (user) {
@@ -36,6 +37,7 @@ const registerUser = async (req, res) => {
       email: user.email,
       token: token,
     });
+    next()
   } catch (error) {
     console.error(error);
     res.status(500).send("Internal Server Error");
