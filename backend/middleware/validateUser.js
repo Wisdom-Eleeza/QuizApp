@@ -10,10 +10,8 @@ function validateRegisterUser(req, res, next) {
   // if (error) return res.status(400).send(error.details[0].message);
   // console.log(next);
   const { error } = schema.validate(req.body);
-  console.log("error:", error);
   if (error) {
     const validationErrors = error.details.map((detail) => detail.message);
-    console.log("Validation errors:", validationErrors);
     return res.status(400).json({success: false, message: error.details[0].message})
   } else {
     return next();
