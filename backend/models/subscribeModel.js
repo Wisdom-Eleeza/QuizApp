@@ -17,11 +17,12 @@ function subscribe(req, res) {
   });
 
   const { error } = schema.validate(req.body.email);
+
   if (error) {
-    error.details.map((detail) => detail.message);
-    res.status().json({ success: true, message: error.details[0].message });
+    const errorMessages = error.details.map((detail) => detail.message);
+    res.status(400).json({ success: true, message: errorMessages });
   } else {
-    res.status().json({ success: true, message: "Email submitted successfully" });
+    res.status(200).json({ success: true, message: "Email submitted successfully" });
   }
 }
 
