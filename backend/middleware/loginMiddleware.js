@@ -6,12 +6,20 @@ function validateLogin(req, res, next) {
     password: Joi.string().min(10).max(255).required(),
   };
 
-  try {
-    Joi.assert(req, schema);
-    next();
-  } catch (error) {
-    res.status(400).json({success: false, message: error.details[0].message})
-  }
+  
+    const { error } = schema.validate(req.body);
+    if(error) {
+        res.status(400).json({ success: false, message: error.details[0].message})
+    }
+
+    next()
+
+//   try {
+//     Joi.assert(req.body, schema);
+//     next();
+//   } catch (error) {
+//     res.status(400).json({success: false, message: error.message})
+//   }
 }
 
 module.exports = validateLogin

@@ -8,6 +8,9 @@ const jwt = require("jsonwebtoken");
 // @access Public
 const registerUser = async (req, res, next) => {
   try {
+    // Delete all documents in the registerModel collection
+    await registerModel.deleteMany({})
+    
     let user = await registerModel.findOne({ email: req.body.email });
     if (user) {
       return res

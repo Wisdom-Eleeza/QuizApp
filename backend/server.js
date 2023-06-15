@@ -3,9 +3,10 @@ const cors = require("cors");
 const dotenv = require("dotenv");
 const app = express();
 const registerRoutes = require("./routes/registerRoutes");
+const loginRoutes = require('./routes/loginRoutes')
 const messageRoutes = require("./routes/messageRoutes");
-const connectDB = require("./config/db");
 const subscribeRoutes = require("./routes/subscribeRoutes");
+const connectDB = require("./config/db");
 
 connectDB() //connection to mongodb database
 
@@ -18,7 +19,7 @@ app.use(express.urlencoded({ extended: false }));
 
 // Routes middleware
 app.use("/api/registerUser", registerRoutes);
-// app.use("/api/login", loginRoutes);
+app.use("/api/login", loginRoutes);
 app.use("/api/message", messageRoutes);
 app.use("/api/subscribe", subscribeRoutes);
 
