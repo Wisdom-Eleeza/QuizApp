@@ -33,9 +33,9 @@ const loginUser = async (req, res) => {
     const token = user.generateAuthToken();
     return res
       .status(200)
-      .json({ success: true, token, message: "Token sent successfully" });
+      .json({ success: true, token, message: "You have successfully logged in." });
   } catch (error) {
-    res.status(500).json({ success: false, message: "Server Error" });
+    res.status(500).json({ success: false, message: "Oops! Something went wrong. Please try again later." });
   }
 };
 
