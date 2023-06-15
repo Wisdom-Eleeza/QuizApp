@@ -18,6 +18,7 @@ app.use(express.urlencoded({ extended: false }));
 
 // Routes middleware
 app.use("/api/registerUser", registerRoutes);
+// app.use("/api/login", loginRoutes);
 app.use("/api/message", messageRoutes);
 app.use("/api/subscribe", subscribeRoutes);
 

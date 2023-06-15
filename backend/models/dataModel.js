@@ -14,3 +14,9 @@ const questionSchema = new Schema({
 })
 
 
+const topicSchema = new Schema({
+    topic: String,
+    questions: [questionSchema]
+})
+
+const Topic = mongoose.model('Topic', topicSchema)
