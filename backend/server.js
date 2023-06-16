@@ -20,7 +20,7 @@ app.use(cookieParser())
 app.use(express.urlencoded({ extended: false }));
 
 app.get("/api/status", (req, res) => {
-  res.send("API is running");
+  res.send("API is running  ");
 });
 
 // Routes middleware
