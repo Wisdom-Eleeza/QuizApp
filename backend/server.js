@@ -7,6 +7,7 @@ const loginRoutes = require("./routes/loginRoutes");
 const messageRoutes = require("./routes/messageRoutes");
 const subscribeRoutes = require("./routes/subscribeRoutes");
 const connectDB = require("./config/db");
+const cookieParser = require("cookie-parser");
 
 connectDB(); //connection to mongodb database
 
@@ -15,6 +16,7 @@ const port = process.env.PORT || 5000;
 
 app.use(cors());
 app.use(express.json());
+app.use(cookieParser())
 app.use(express.urlencoded({ extended: false }));
 
 app.get("/api/status", (req, res) => {
