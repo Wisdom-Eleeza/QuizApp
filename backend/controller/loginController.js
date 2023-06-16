@@ -1,41 +1,56 @@
-const userModel = require("../models/userModels");
+const { userModel, generateAccessToken, generateRefreshToken } = require("../models/userModels");
 const bcrypt = require("bcrypt");
-const connectDB = require("../config/db");
-const { log } = require("console");
 
 // @desc Register new user
 // @route POST /api/login
 // @access Public
 const loginUser = async (req, res) => {
   try {
-    // finding the email a user, if not in the database send error
-    let user = await userModel.findOne({ email: req.body.email });
+    // Find the user by email, if not found in the database, send an error
+    const { email, password, rememberMe } = req.body;
+    if (!email || !password)
+      return res.status(401).json({ success: false, message: "" });
+    let user = await userModel.findOne({ email: email });
     if (!user) {
-      return res
-        .status(400)
-        .json({ success: false, message: "Invalid Email or Password" });
+      return res.status(400).json({
+        success: false,
+        message: "Authentication failed. Please check your login credentials.",
+      });
     }
 
-    // comparing the password provided by the user with the hashed password in the database, if not true user have no access
-    const validPassword = await bcrypt.compare(
-      req.body.password,
-      user.password
-    );
-    console.log(validPassword);
+    // Compare the password provided by the user with the hashed password in the database, if not true, the user has no access
+    const validPassword = await bcrypt.compare(password, user.password);
     if (!validPassword)
       return res
         .status(400)
-        .json({ success: false, message: " Email or Password" });
+        .json({ success: false, message: "Invalid credentials provided" });
 
-    // token generating logic in userModel,
-    // generating token to a specific user
-    // console.log(user.methods);
-    const token = user.generateAuthToken();
+    // Generate access token
+    const accessToken = generateAccessToken(user._id);
+    // Generate refresh token
+    const refreshToken = generateRefreshToken(user._id, rememberMe);
+
+    // Store refresh token in user document in the database
+    user.refreshToken = refreshToken;
+    await user.save();
+
+    // Send both tokens in the response
     return res
       .status(200)
-      .json({ success: true, token, message: "Token sent successfully" });
+      .cookie("refreshToken", refreshToken, {
+        maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days expiration in milliseconds
+        httpOnly: true, // Ensuring the cookie is only accessed via HTTP(S)
+      })
+      .json({
+        success: true,
+        accessToken,
+        message: "You have successfully logged in.",
+      });
   } catch (error) {
-    res.status(500).json({ success: false, message: "Server Error" });
+    res.status(500).json({
+      success: false,
+      message: "Oops! Something went wrong. Please try again later.",
+    });
   }
 };
 
