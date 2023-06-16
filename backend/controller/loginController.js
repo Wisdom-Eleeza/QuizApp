@@ -1,57 +1,50 @@
 const userModel = require("../models/userModels");
 const bcrypt = require("bcrypt");
 const connectDB = require("../config/db");
-const { log } = require("console");
+const jwt = require("jsonwebtoken");
 
 // @desc Register new user
 // @route POST /api/login
 // @access Public
 const loginUser = async (req, res) => {
   try {
-    // finding the email a user, if not in the database send error
+    // Find the user by email, if not found in the database, send an error
     let user = await userModel.findOne({ email: req.body.email });
     if (!user) {
       return res
         .status(400)
         .json({
           success: false,
-          message:
-            "Authentication failed. Please check your login credentials.",
+          message: "Authentication failed. Please check your login credentials.",
         });
     }
 
-    // comparing the password provided by the user with the hashed password in the database, if not true user have no access
-    const validPassword = await bcrypt.compare(
-      req.body.password,
-      user.password
-    );
-    console.log(validPassword);
+    // Compare the password provided by the user with the hashed password in the database, if not true, the user has no access
+    const validPassword = await bcrypt.compare(req.body.password, user.password);
     if (!validPassword)
       return res
         .status(400)
         .json({ success: false, message: "Invalid credentials provided" });
 
+    // Generate access token
+    const accessToken = generateAccessToken(user._id);
+    // Generate refresh token
+    const refreshToken = generateRefreshToken(user._id);
 
-    // checkbox value sent to the req.body
-    const rememberMe = req.body.rememberMe;
+    // Store refresh token in user document in the database
+    user.refreshToken = refreshToken;
+    await user.save();
 
-    // token generating logic in userModel,
-    // generating token to a specific user
-    // console.log(user.methods);
-    const token = user.generateAuthToken();
-
-    // storing token in a cookie or local storage for longer duration
-    if(rememberMe) {
-      res.cookie('token', token, {
-        maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days expiration in milliseconds
-        httpOnly: true, // ensuring the cookie is only accessed via HTTP(S)
-      })
-    }
+    // Send both tokens in the response
     return res
       .status(200)
+      .cookie("refreshToken", refreshToken, {
+        maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days expiration in milliseconds
+        httpOnly: true, // Ensuring the cookie is only accessed via HTTP(S)
+      })
       .json({
         success: true,
-        token,
+        accessToken,
         message: "You have successfully logged in.",
       });
   } catch (error) {

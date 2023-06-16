@@ -38,10 +38,18 @@ const userSchema = new mongoose.Schema(
 
 // generating token logic, jwt.sign({takes 3 arguments to generate the token})
 userSchema.methods.generateAuthToken = function () {
-  const token = jwt.sign({ _id: this._id }, process.env.JWT_SECRET, {
-    expiresIn: "1d",
+  const accessToken = jwt.sign({ _id: this._id }, process.env.JWT_SECRET, {
+    expiresIn: "20m",
   });
-  return token; 
+  return accessToken
+};
+
+// refresh Token
+userSchema.methods.generateAuthToken = function () {
+  const refreshToken = jwt.sign({ _id: this._id }, process.env.JWT_SECRET, {
+    expiresIn: "30d",
+  });
+  return refreshToken
 };
 
 const userModel = mongoose.model("User", userSchema);
