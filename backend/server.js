@@ -28,6 +28,7 @@ app.use("/api/registerUser", registerRoutes);
 app.use("/api/login", loginRoutes);
 app.use("/api/message", messageRoutes);
 app.use("/api/subscribe", subscribeRoutes);
+app.use("/api/subscribe", subscribeRoutes);
 
 app.listen(port, () => {
   console.log(`Server listening on http://localhost:${port}`);
