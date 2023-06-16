@@ -37,20 +37,26 @@ const userSchema = new mongoose.Schema(
 );
 
 // generating token logic, jwt.sign({takes 3 arguments to generate the token})
-userSchema.methods.generateAuthToken = function () {
+exports.generateAccessToken= function () {
   const accessToken = jwt.sign({ _id: this._id }, process.env.JWT_SECRET, {
     expiresIn: "20m",
   });
-  return accessToken
+  return accessToken;
 };
 
 // refresh Token
-userSchema.methods.generateAuthToken = function () {
-  const refreshToken = jwt.sign({ _id: this._id }, process.env.JWT_SECRET, {
-    expiresIn: "30d",
-  });
-  return refreshToken
+exports.generateRefreshToken = function (rememberMe) {
+  if (rememberMe) {
+    const refreshToken = jwt.sign({ _id: this._id }, process.env.JWT_SECRET, {
+      expiresIn: "30d",
+    });
+    return refreshToken;
+  } else {
+    const refreshToken = jwt.sign({ _id: this._id }, process.env.JWT_SECRET, {
+      expiresIn: "1d",
+    });
+    return refreshToken;
+  }
 };
 
-const userModel = mongoose.model("User", userSchema);
-module.exports = userModel;
+exports.userModel = mongoose.model("User", userSchema);
