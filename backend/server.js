@@ -28,7 +28,12 @@ app.use("/api/registerUser", registerRoutes);
 app.use("/api/login", loginRoutes);
 app.use("/api/message", messageRoutes);
 app.use("/api/subscribe", subscribeRoutes);
+// app.use("/api/forget-password", subscribeRoutes);
 
-app.listen(port, () => {
-  console.log(`Server listening on http://localhost:${port}`);
-});
+try {
+  app.listen(port, () => {
+    console.log(`Server listening on http://localhost:${port}`);
+  });
+} catch (error) {
+  console.log('Cannot connect to the server')
+}

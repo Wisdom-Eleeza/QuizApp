@@ -9,7 +9,7 @@ const loginUser = async (req, res) => {
     // Find the user by email, if not found in the database, send an error
     const { email, password, rememberMe } = req.body;
     if (!email || !password)
-      return res.status(401).json({ success: false, message: "" });
+      return res.status(401).json({ success: false, message: "Please Provide both email and password" });
     let user = await userModel.findOne({ email: email });
     if (!user) {
       return res.status(400).json({
