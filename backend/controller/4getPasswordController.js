@@ -27,14 +27,14 @@ const forgetPassword = async () => {
     let transporter = nodemailer.createTransport({
       service: "gmail",
       auth: {
-        user: "your-email@gmail.com",
-        password: "your-password",
+        user: "wisdom.eleeza@amalitech.com", // youremail@gmail.com
+        password: "wisdom1234567890", //your password
       },
     });
     let mailOptions = {
-      from: "your-email@gmail.com",
-      to: "recipient-email@gmail.com",
-      subject: "Password Reset",
+      from: "wisdom.eleeza@amalitech.com", //youremail@gmail.com
+      to: user.email, //recipient-email@gmail.com
+      subject: "Password Reset", //Password Reset
       text: link,
     };
 
@@ -43,7 +43,7 @@ const forgetPassword = async () => {
       if (error) {
         res.status(400).json({ success: false, message: "Failed to send email" });
       } else {
-        res.status(200).json({ success: true, message: "Email sent" });
+        res.status(200).json({ success: true, message: "Email sent: " + info.response });
       }
     });
   } catch (error) {
