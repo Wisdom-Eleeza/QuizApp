@@ -1,9 +1,8 @@
 const userModel = require("../models/userModels");
 const nodemailer = require("nodemailer");
-const bcrypt = require("bcrypt");
 
 // @desc Register new user
-// @route POST /api/login
+// @route POST /api/forgetPassword
 // @access Public
 const forgetPassword = async () => {
   const { email } = req.body;
@@ -41,12 +40,20 @@ const forgetPassword = async () => {
     // Sending the password reset email
     transporter.sendMail(mailOptions, (error, info) => {
       if (error) {
-        res.status(400).json({ success: false, message: "Failed to send email" });
+        res
+          .status(400)
+          .json({ success: false, message: "Failed to send email" });
       } else {
-        res.status(200).json({ success: true, message: "Email sent: " + info.response });
+        res
+          .status(200)
+          .json({ success: true, message: "Email sent: " + info.response });
       }
     });
   } catch (error) {
     res.status(500).json({ message: "Something went wrong" });
   }
 };
+
+
+
+module.exports = forgetPassword;
