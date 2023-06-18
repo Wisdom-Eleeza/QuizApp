@@ -5,7 +5,7 @@ const nodemailer = require("nodemailer");
 // @route POST /api/forgetPassword
 // @access Public
 const forgetPassword = async () => {
-  const { email } = req.body;
+  const { id, email } = req.body;
   try {
     let user = await userModel.findOne({ email: email });
     if (!user) {
@@ -20,14 +20,14 @@ const forgetPassword = async () => {
         expiresIn: "20m",
       }
     );
-    const link = `http://localhost:8080/reset-password/${user.id}/${token}`;
+    const link = `http://localhost:8080/api/resetPassword/${id}/${token}`;
 
     // nodemailer transporter for sending the reset password email
     let transporter = nodemailer.createTransport({
       service: "gmail",
       auth: {
         user: "wisdom.eleeza@amalitech.com", // youremail@gmail.com
-        password: "wisdom1234567890", //your password
+        password: "wisdom1234567890", //your password process.env.EMAIL_PASSWORD
       },
     });
     let mailOptions = {
