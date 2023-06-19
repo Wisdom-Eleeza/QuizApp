@@ -9,7 +9,7 @@ const subscribeRoutes = require("./routes/subscribeRoutes");
 const forgetPassword = require('./routes/forgetPasswordRoutes')
 const resetPassword = require('./routes/resetPasswordRoutes')
 const resetPassword = require('./routes/resetPasswordRoutes')
-const resetPassword = require('./routes/topicRoutes')
+const Topic = require('./routes/topicRoutes')
 const connectDB = require("./config/db");
 const cookieParser = require("cookie-parser");
 
