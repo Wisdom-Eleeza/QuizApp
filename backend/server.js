@@ -8,6 +8,8 @@ const messageRoutes = require("./routes/messageRoutes");
 const subscribeRoutes = require("./routes/subscribeRoutes");
 const forgetPassword = require('./routes/forgetPasswordRoutes')
 const resetPassword = require('./routes/resetPasswordRoutes')
+const resetPassword = require('./routes/resetPasswordRoutes')
+const resetPassword = require('./routes/topicRoutes')
 const connectDB = require("./config/db");
 const cookieParser = require("cookie-parser");
 
@@ -32,6 +34,7 @@ app.use("/api/message", messageRoutes);
 app.use("/api/subscribe", subscribeRoutes);
 app.use("/api/forgetPassword", forgetPassword);
 app.use("/api/resetPassword/:id/:token", resetPassword);
+app.use("/api/topic", Topic);
 
 try {
   app.listen(port, () => {
