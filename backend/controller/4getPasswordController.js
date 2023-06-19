@@ -45,7 +45,7 @@ const forgetPassword = async (req, res) => {
     let mailOptions = {
       from: "wisdom.eleeza@amalitech.com", // Replace with your email
       to: user.email, // Recipient's email
-      subject: "Password Reset", // Email subject
+      subject: "Reset Your Password", // Email subject
       text: link, // Email body, containing the reset link
     };
 
