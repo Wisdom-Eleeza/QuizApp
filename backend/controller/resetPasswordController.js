@@ -23,7 +23,7 @@ const resetPassword = async (req, res) => {
       // return res.redirect(`/reset-password/${id}/${token}`);
       user.password = await bcrypt.hash(password, 10) // hashing the new password before updating
       await user.save(); // saving the updated user
-      return res.redirect("http://localhost:8080/api/login");
+      // return res.redirect("http://localhost:8080/api/login");
     } catch (error) {
       if (error instanceof jwt.TokenExpiredError) {
         return res

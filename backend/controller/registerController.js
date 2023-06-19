@@ -1,5 +1,5 @@
 // const validateRegisterUser = require("../middleware/validateUser");
-const registerModel = require("../models/userModels");
+const {userModel} = require("../models/userModels");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
@@ -11,14 +11,14 @@ const registerUser = async (req, res, next) => {
     // Delete all documents in the registerModel collection
     // await registerModel.deleteMany({})
     
-    let user = await registerModel.findOne({ email: req.body.email });
+    let user = await userModel.findOne({ email: req.body.email });
     if (user) {
       return res
         .status(400)
         .json({ success: false, message: "User already exist" });
     }
 
-    user = new registerModel({
+    user = new userModel({
       name: req.body.name,
       email: req.body.email,
       password: req.body.password,
@@ -42,6 +42,7 @@ const registerUser = async (req, res, next) => {
       },
     });
   } catch (error) {
+    console.log(error);
     res.status(500).json({ success: false, message: "Something went wrong" });
   }
 };
