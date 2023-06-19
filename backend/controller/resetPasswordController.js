@@ -2,6 +2,10 @@ const userModel = require("../models/userModels");
 const bcrypt = require('bcrypt')
 const jwt = require("jsonwebtoken");
 
+
+// @desc Register new user
+// @route POST /api/resetPassword
+// @access Public
 const resetPassword = async (req, res) => {
   try {
     const { id, token } = req.params;

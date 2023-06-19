@@ -17,7 +17,7 @@ const forgetPassword = async () => {
       { email: user.email, id: user._id },
       process.env.JWT_SECRET,
       {
-        expiresIn: "20m",
+        expiresIn: "30m",
       }
     );
     const link = `http://localhost:8080/api/resetPassword/${id}/${token}`;
