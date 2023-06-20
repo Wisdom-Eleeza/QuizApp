@@ -33,7 +33,7 @@ app.use("/api/login", loginRoutes);
 app.use("/api/message", messageRoutes);
 app.use("/api/subscribe", subscribeRoutes);
 app.use("/api/forgetPassword", forgetPassword);
-app.use("/api/resetPassword/:id/:token", resetPassword);
+app.use("/api/resetPassword", resetPassword);
 app.use("/api/topic", Topic);
 
 try {
