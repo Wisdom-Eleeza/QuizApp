@@ -6,12 +6,13 @@ const jwt = require("jsonwebtoken");
 // @route POST /api/resetPassword
 // @access Public
 const resetPassword = async (req, res) => {
+  console.log("Hello");
   try {
     const { id, token } = req.params;
     const { password } = req.body; // Retrieved the password from the request body
     console.log(id);
     const user = await userModel.findOne({ _id: id });
-    console.log(user);
+    // console.log(user);
     if (!user) {
       return res
         .status(404)
@@ -38,7 +39,7 @@ const resetPassword = async (req, res) => {
       return res.status(400).json({ success: false, message: "Invalid token" });
     }
   } catch (error) {
-    console.log(error);
+    console.log("error", error);
     return res.status(404).json({ success: false, message: "Not verified" });
   }
 };

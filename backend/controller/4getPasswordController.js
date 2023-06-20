@@ -31,7 +31,7 @@ const forgetPassword = async (req, res) => {
     console.log(token)
 
     // Create the password reset link
-    const link = `http://localhost:5173/resetPassword/${user._id}/${token.replaceAll('.', '-')}`;
+    const link = `http://localhost:5173/resetPassword/${user._id}/?token=${token}`;
 
     // Create a nodemailer transporter for sending the reset password email
     let transporter = nodemailer.createTransport({
@@ -48,7 +48,7 @@ const forgetPassword = async (req, res) => {
       to: user.email, // Recipient's email
       subject: "Reset Your Password", // Email subject
       html: `<p>Click the link below to reset your password:
-      <a href="${link}">${link}</a> 
+      <a href="${link}">${link}</a>
       </p>`
       //Email body, containing the reset password link
     };
