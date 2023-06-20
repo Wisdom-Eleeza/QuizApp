@@ -28,9 +28,10 @@ const forgetPassword = async (req, res) => {
         expiresIn: "30m",
       }
     );
+    console.log(token)
 
     // Create the password reset link
-    const link = `http://localhost:5173/resetPassword/${user._id}/${token}`;
+    const link = `http://localhost:5173/resetPassword/${user._id}/${token.replaceAll('.', '-')}`;
 
     // Create a nodemailer transporter for sending the reset password email
     let transporter = nodemailer.createTransport({
