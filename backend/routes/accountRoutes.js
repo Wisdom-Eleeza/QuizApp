@@ -1,7 +1,9 @@
 const express = require('express')
 const accountUpdate = require('../controller/accountController')
-const accountSettingsValidation = require('../middleware/validateAccountSettings')
+const validateUser = require('../middleware/validateUser')
 const router = express.Router()
 
 
-router.put('/:id', accountSettingsValidation, accountUpdate)
+router.put('/:id', validateUser, accountUpdate)
+
+module.exports = router

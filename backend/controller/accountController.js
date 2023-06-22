@@ -1,9 +1,9 @@
-const userModel = require("../models/userModels");
+const { userModel } = require("../models/userModels");
 
 const accountUpdate = async (req, res) => {
   try {
     const { id } = req.params;
-    const { fullName, contact, location, gender } = req.body;
+    const { contact, location, gender } = req.body;
 
     //Finding user by ID
     const user = await userModel.findById({ _id: id });
@@ -19,11 +19,16 @@ const accountUpdate = async (req, res) => {
     user.contact = contact;
     user.location = location;
     user.gender = gender;
-    await user.save()
+    await user.save();
 
-    res.status(200).json({ success: true, message: "Account Settings Updated Successfully" })
+    res
+      .status(200)
+      .json({
+        success: true,
+        message: "Account Settings Updated Successfully",
+      });
   } catch (error) {
-    res.status(500).json({ error: " Failed to Update Account Settings" })
+    res.status(500).json({ error: " Failed to Update Account Settings" });
   }
 };
 

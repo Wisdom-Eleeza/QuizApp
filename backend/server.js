@@ -35,7 +35,7 @@ app.use("/api/message", messageRoutes);
 app.use("/api/subscribe", subscribeRoutes);
 app.use("/api/forgetPassword", forgetPassword);
 app.use("/api/resetPassword", resetPassword);
-// app.use("/api/account", accountRoutes);
+app.use("/api/account", accountRoutes);
 app.use("/api/topic", Topic);
 
 app.listen(port, () => {
