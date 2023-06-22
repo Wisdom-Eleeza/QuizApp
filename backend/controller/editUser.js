@@ -4,6 +4,7 @@ async function editUser(req, res) {
   try {
     const { id } = req.params;
     const data = req.body;
+    console.log(data);
     const updatedUser = await User.findByIdAndUpdate({ _id: id }, data, {
       new: true,
       runValidators: true,
@@ -19,4 +20,23 @@ async function editUser(req, res) {
     res.status(500).json({ success: false, message: "Something went wrong" });
   }
 }
-module.exports = { editUser };
+
+async function deleteUser(req, res) {
+  try {
+    const { id } = req.params;
+    const deletedUser = await User.findByIdAndDelete({ _id: id });
+
+    if (!deletedUser) {
+      return res
+        .status(404)
+        .json({ success: false, message: "User does not exist" });
+    } else {
+      res
+        .status(200)
+        .json({ success: true, message: "User deleted successfully" });
+    }
+  } catch (error) {
+    res.status(500).json({ success: false, message: "Something went wrong" });
+  }
+}
+module.exports = { editUser, deleteUser };
