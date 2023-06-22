@@ -8,6 +8,7 @@ const messageRoutes = require("./routes/messageRoutes");
 const subscribeRoutes = require("./routes/subscribeRoutes");
 const forgetPassword = require("./routes/forgetPasswordRoutes");
 const resetPassword = require("./routes/resetPasswordRoutes");
+const accountRoutes = require("./routes/accountRoutes")
 const Topic = require("./routes/topicRoutes");
 const { connectDB, populateDatabase } = require("./config/db");
 const cookieParser = require("cookie-parser");
@@ -34,12 +35,9 @@ app.use("/api/message", messageRoutes);
 app.use("/api/subscribe", subscribeRoutes);
 app.use("/api/forgetPassword", forgetPassword);
 app.use("/api/resetPassword", resetPassword);
+// app.use("/api/account", accountRoutes);
 app.use("/api/topic", Topic);
 
-try {
-  app.listen(port, () => {
-    console.log(`Server listening on http://localhost:${port}`);
-  });
-} catch (error) {
-  console.log("Cannot connect to the server");
-}
+app.listen(port, () => {
+  console.log(`Server listening on http://localhost:${port}`);
+});
