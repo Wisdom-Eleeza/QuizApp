@@ -4,6 +4,6 @@ const validateUser = require('../middleware/validateUser')
 const router = express.Router()
 
 
-router.put('/:id', validateUser, accountUpdate)
+router.patch('/:id', validateUser, accountUpdate)
 
 module.exports = router

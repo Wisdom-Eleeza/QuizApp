@@ -1,5 +1,8 @@
 const { userModel } = require("../models/userModels");
 
+// @desc Register new user
+// @route POST /api/account/:id
+// @access Public
 const accountUpdate = async (req, res) => {
   try {
     const { id } = req.params;
@@ -15,7 +18,6 @@ const accountUpdate = async (req, res) => {
         .json({ success: false, message: "User does not exist" });
 
     //Updating the user's account settings if the user is found
-    user.fullName = fullName;
     user.contact = contact;
     user.location = location;
     user.gender = gender;
