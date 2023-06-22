@@ -1,11 +1,11 @@
-const User = require("../models/userModels");
+const { userModel } = require("../models/userModels");
 
 async function editUser(req, res) {
   try {
     const { id } = req.params;
     const data = req.body;
     console.log(data);
-    const updatedUser = await User.findByIdAndUpdate({ _id: id }, data, {
+    const updatedUser = await userModel.findByIdAndUpdate({ _id: id }, data, {
       new: true,
       runValidators: true,
     });
@@ -24,7 +24,7 @@ async function editUser(req, res) {
 async function deleteUser(req, res) {
   try {
     const { id } = req.params;
-    const deletedUser = await User.findByIdAndDelete({ _id: id });
+    const deletedUser = await { userModel }.findByIdAndDelete({ _id: id })
 
     if (!deletedUser) {
       return res
