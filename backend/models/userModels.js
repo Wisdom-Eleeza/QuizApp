@@ -3,6 +3,11 @@ const jwt = require("jsonwebtoken");
 
 const userSchema = new mongoose.Schema(
   {
+    fullName: {
+      type: String,
+      required: [true, "Full name is required"],
+      maxlength: 255,
+    },
     name: {
       type: String,
       required: [true, "Name is required"],
@@ -20,6 +25,11 @@ const userSchema = new mongoose.Schema(
       required: [true, "Password is a required field"],
       minlength: 10,
       maxlength: 255,
+    },
+    contact: {
+      type: String,
+      minlength: 10,
+      maxlength: 20,
     },
     profileImage: {
       type: String,
