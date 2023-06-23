@@ -1,4 +1,8 @@
-const { userModel, generateAccessToken, generateRefreshToken } = require("../models/userModels");
+const {
+  userModel,
+  generateAccessToken,
+  generateRefreshToken,
+} = require("../models/userModels");
 const bcrypt = require("bcrypt");
 
 // @desc Register new user
@@ -7,15 +11,30 @@ const bcrypt = require("bcrypt");
 const loginUser = async (req, res) => {
   try {
     // Find the user by email, if not found in the database, send an error
-    const { email, password, rememberMe } = req.body;
+    const { email, password, rememberMe, isActive } = req.body;
     if (!email || !password)
-      return res.status(401).json({ success: false, message: "Please Provide both email and password" });
+      return res
+        .status(401)
+        .json({
+          success: false,
+          message: "Please Provide both email and password",
+        });
     let user = await userModel.findOne({ email: email });
     if (!user) {
       return res.status(400).json({
         success: false,
         message: "Authentication failed. Please check your login credentials.",
       });
+    }
+
+    //checking if the user is active
+    if (!user.isActive) {
+      return res
+        .status(400)
+        .json({
+          success: false,
+          message: "You have no account, signup to create account",
+        });
     }
 
     // Compare the password provided by the user with the hashed password in the database, if not true, the user has no access

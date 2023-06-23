@@ -8,7 +8,8 @@ const messageRoutes = require("./routes/messageRoutes");
 const subscribeRoutes = require("./routes/subscribeRoutes");
 const forgetPassword = require("./routes/forgetPasswordRoutes");
 const resetPassword = require("./routes/resetPasswordRoutes");
-const accountRoutes = require("./routes/accountRoutes")
+const accountRoutes = require("./routes/accountRoutes");
+const deleteRoutes = require("./routes/deleteRoutes");
 const Topic = require("./routes/topicRoutes");
 const { connectDB, populateDatabase } = require("./config/db");
 const cookieParser = require("cookie-parser");
@@ -36,7 +37,7 @@ app.use("/api/users/subscribe", subscribeRoutes);
 app.use("/api/users/forgetPassword", forgetPassword);
 app.use("/api/users/resetPassword", resetPassword);
 app.use("/api/users/account", accountRoutes);
-app.use("/api/users/delete", accountRoutes);
+app.use("/api/users/delete", deleteRoutes);
 app.use("/api/users/topic", Topic);
 
 app.listen(port, () => {
