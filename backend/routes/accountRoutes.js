@@ -1,10 +1,10 @@
 const express = require('express')
 const accountUpdate = require('../controller/accountController')
-const validateUser = require('../middleware/validateUser')
+const validateAccount = require('../middleware/accountMiddleware')
 const router = express.Router()
 
 
-router.patch('/:id', validateUser, accountUpdate)
-router.patch('/:id/password', validateUser, accountUpdate)
+router.patch('/:id', validateAccount, accountUpdate)
+router.patch('/:id/password', accountUpdate)
 
 module.exports = router
