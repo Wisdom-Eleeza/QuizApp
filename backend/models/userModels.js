@@ -11,7 +11,7 @@ const userSchema = new mongoose.Schema(
     },
     gender: {
       type: String,
-      enum: ["male", "female"]
+      enum: ["male", "female"],
     },
     email: {
       type: String,
@@ -42,6 +42,10 @@ const userSchema = new mongoose.Schema(
     },
     addInterest: {
       type: [String],
+    },
+    isActive: {
+      type: Boolean,
+      default: true,
     },
   },
   {

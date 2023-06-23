@@ -2,8 +2,10 @@ const Joi = require("joi");
 
 function validateAccountSettings(req, res, next) {
   const schema = Joi.object({
-    contact: Joi.string().min(10).max(20).required(),
-    location: Joi.string().max(150).required(),
+    name: Joi.string().min(5).max(255).required(),
+    email: Joi.string().min(5).max(50).required().email(),
+    contact: Joi.string().min(10).max(20),
+    location: Joi.string().max(150),
     gender: Joi.string().valid("male", "female").required(),
   });
   const { error } = schema.validate(req.body);

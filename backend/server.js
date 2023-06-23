@@ -36,6 +36,7 @@ app.use("/api/users/subscribe", subscribeRoutes);
 app.use("/api/users/forgetPassword", forgetPassword);
 app.use("/api/users/resetPassword", resetPassword);
 app.use("/api/users/account", accountRoutes);
+app.use("/api/users/delete", accountRoutes);
 app.use("/api/users/topic", Topic);
 
 app.listen(port, () => {
