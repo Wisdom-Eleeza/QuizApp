@@ -2,7 +2,8 @@ const { userModel } = require("../models/userModels");
 const bcrypt = require("bcrypt");
 
 // @desc Register new user
-// @route POST /api/account/:id
+// @route POST /api/users/account/:id
+// @route POST /api/users/account/:id/password
 // @access Public
 const accountUpdate = async (req, res) => {
   try {
