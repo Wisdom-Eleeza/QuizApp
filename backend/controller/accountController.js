@@ -1,4 +1,5 @@
 const { userModel } = require("../models/userModels");
+const bcrypt = require('bcrypt')
 
 // @desc Register new user
 // @route POST /api/account/:id
@@ -6,7 +7,8 @@ const { userModel } = require("../models/userModels");
 const accountUpdate = async (req, res) => {
   try {
     const { id } = req.params;
-    const { contact, location, gender } = req.body;
+    const { contact, location, gender, currentPassword, newPassword, confirmPassword } = req.body;
+    console.log(req.body)
 
     //Finding user by ID
     const user = await userModel.findById({ _id: id });
@@ -29,6 +31,13 @@ const accountUpdate = async (req, res) => {
         success: true,
         message: "Account Settings Updated Successfully",
       });
+
+    //Comparing the current password with the stored password
+    const isPasswordMatch = await bcrypt.compare(currentPassword, user.password)
+    if(!isPasswordMatch) return res.status(401).json({ success: false, message: "Wrong Password Provided"})
+
+    //Validating the new password
+    if(newPassword !== confirmPassword) return res.status(400).json({ success: false, message: "Password does not match, Try Again"})
   } catch (error) {
     res.status(500).json({ error: " Failed to Update Account Settings" });
   }

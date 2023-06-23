@@ -4,7 +4,7 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
 // @desc Register new user
-// @route POST /api/registerUser (update and delete user avatar)
+// @route POST /api/user (update and delete user avatar)
 // @access Public
 const registerUser = async (req, res) => {
   try {

@@ -10,9 +10,6 @@ function validateRegisterUser(req, res, next) {
       .max(255)
       .required()
       .regex(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[@])[\w@]+$/),
-    contact: Joi.string().min(10).max(20).required(),
-    location: Joi.string().max(150).required(),
-    gender: Joi.string().valid("male", "female").required(),
   });
   const { error } = schema.validate(req.body);
   if (error) {
