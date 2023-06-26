@@ -1,15 +1,15 @@
 const { userModel } = require("../models/userModels");
 
-// @desc Register new user
-// @route POST /api/deleteUser/:id
+// @desc Delete a user
+// @route DELETE /api/users/delete/:id
 // @access Public
 async function deleteUser(req, res) {
   try {
     const { id } = req.params;
-    //find the user by ID and update the isActive field to false, new option return the updated document
-    const deletedUser = await userModel.findByIdAndUpdate({
-      _id: id,
-      isActive: false,
+    // specify which fields should be updated
+    const updatedFields = { isActive: false };
+    // pass ID and updated fields as separate arguments to findByIdAndUpdate
+    const deletedUser = await userModel.findByIdAndUpdate(id, updatedFields, {
       new: true,
     });
 
@@ -20,7 +20,7 @@ async function deleteUser(req, res) {
     } else {
       res
         .status(200)
-        .json({ success: true, message: "User Deleted Successfully" });
+        .json({ success: true, message: "User deleted successfully" });
     }
   } catch (error) {
     res.status(500).json({ success: false, message: "Something went wrong" });
