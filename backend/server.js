@@ -2,12 +2,14 @@ const express = require("express");
 const cors = require("cors");
 const dotenv = require("dotenv");
 const app = express();
-const registerRoutes = require("./routes/registerRoutes");
+const registerRoutes = require("./routes/userRoutes");
 const loginRoutes = require("./routes/loginRoutes");
 const messageRoutes = require("./routes/messageRoutes");
 const subscribeRoutes = require("./routes/subscribeRoutes");
 const forgetPassword = require("./routes/forgetPasswordRoutes");
 const resetPassword = require("./routes/resetPasswordRoutes");
+const accountRoutes = require("./routes/accountRoutes");
+const deleteRoutes = require("./routes/deleteRoutes");
 const Topic = require("./routes/topicRoutes");
 const { connectDB, populateDatabase } = require("./config/db");
 const cookieParser = require("cookie-parser");
@@ -23,23 +25,21 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: false }));
 
-app.get("/api/status", (req, res) => {
+app.get("/api/users/status", (req, res) => {
   res.send("API is running  ");
 });
 
 // Routes middleware
-app.use("/api/registerUser", registerRoutes);
-app.use("/api/login", loginRoutes);
-app.use("/api/message", messageRoutes);
-app.use("/api/subscribe", subscribeRoutes);
-app.use("/api/forgetPassword", forgetPassword);
-app.use("/api/resetPassword", resetPassword);
-app.use("/api/topic", Topic);
+app.use("/api/users", registerRoutes);
+app.use("/api/users/login", loginRoutes);
+app.use("/api/users/message", messageRoutes);
+app.use("/api/users/subscribe", subscribeRoutes);
+app.use("/api/users/forgetPassword", forgetPassword);
+app.use("/api/users/resetPassword", resetPassword);
+app.use("/api/users/account", accountRoutes);
+app.use("/api/users/delete", deleteRoutes);
+app.use("/api/users/topic", Topic);
 
-try {
-  app.listen(port, () => {
-    console.log(`Server listening on http://localhost:${port}`);
-  });
-} catch (error) {
-  console.log("Cannot connect to the server");
-}
+app.listen(port, () => {
+  console.log(`Server listening on http://localhost:${port}`);
+});

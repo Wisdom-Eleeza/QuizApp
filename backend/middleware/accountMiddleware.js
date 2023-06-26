@@ -1,15 +1,12 @@
 const Joi = require("joi");
 
-// Password must contain at least one uppercase letter, one lowercase letter, one number, and the '@' symbol.
-function validateRegisterUser(req, res, next) {
+function validateAccountSettings(req, res, next) {
   const schema = Joi.object({
     name: Joi.string().min(5).max(255).required(),
     email: Joi.string().min(5).max(50).required().email(),
-    password: Joi.string()
-      .min(10)
-      .max(255)
-      .required()
-      .regex(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[@])[\w@]+$/),
+    contact: Joi.string().min(10).max(20),
+    location: Joi.string().max(150),
+    gender: Joi.string().valid("male", "female").required(),
   });
   const { error } = schema.validate(req.body);
   if (error) {
@@ -20,4 +17,4 @@ function validateRegisterUser(req, res, next) {
   }
 }
 
-module.exports = validateRegisterUser;
+module.exports = validateAccountSettings;
