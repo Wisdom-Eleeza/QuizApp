@@ -16,7 +16,6 @@ const accountUpdate = async (req, res) => {
       newPassword,
       confirmPassword,
     } = req.body;
-    console.log(req.body);
 
     // Finding user by ID
     const user = await userModel.findById(id);
@@ -27,34 +26,36 @@ const accountUpdate = async (req, res) => {
         .status(404)
         .json({ success: false, message: "User does not exist" });
 
-    // Comparing the current password with the stored password
-    const isPasswordMatch = await bcrypt.compare(
-      currentPassword,
-      user.password
-    );
-    if (!isPasswordMatch)
-      return res
-        .status(401)
-        .json({ success: false, message: "Wrong Password Provided" });
+    // Ensure that a current password is provided and compare with stored password
+    if (currentPassword) {
+      const isPasswordMatch = await bcrypt.compare(
+        currentPassword,
+        user.password
+      );
+      if (!isPasswordMatch)
+        return res
+          .status(401)
+          .json({ success: false, message: "Wrong Password Provided" });
+    }
 
-    // Validating the new password
-    if (newPassword !== confirmPassword)
+    // If new password is provided, ensure that both it and confirm password matches
+    if (newPassword && confirmPassword && newPassword !== confirmPassword)
       return res.status(400).json({
         success: false,
         message: "Passwords do not match, please try again",
       });
 
-    // Updating the user's account settings if the user is found
+    // Update user details
     user.contact = contact;
     user.location = location;
     user.gender = gender;
-    
+
     // Updating the password if a new password is provided
     if (newPassword) {
       const hashedPassword = await bcrypt.hash(newPassword, 10);
       user.password = hashedPassword;
     }
-    
+
     await user.save();
 
     res.status(200).json({
