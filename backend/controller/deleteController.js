@@ -6,12 +6,8 @@ const { userModel } = require("../models/userModels");
 async function deleteUser(req, res) {
   try {
     const { id } = req.params;
-    // specify which fields should be updated
-    const updatedFields = { isActive: false };
     // pass ID and updated fields as separate arguments to findByIdAndUpdate
-    const deletedUser = await userModel.findByIdAndUpdate(id, updatedFields, {
-      new: true,
-    });
+    const deletedUser = await userModel.findByIdAndDelete(id);
 
     if (!deletedUser) {
       return res
