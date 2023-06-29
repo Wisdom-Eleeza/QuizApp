@@ -9,12 +9,13 @@ const subscribeRoutes = require("./routes/subscribeRoutes");
 const forgetPassword = require("./routes/forgetPasswordRoutes");
 const resetPassword = require("./routes/resetPasswordRoutes");
 const detailRoutes = require("./routes/detailRoutes");
-const passwordUpdate = require('./routes/passwordUpdateRoutes')
+const passwordUpdate = require("./routes/passwordUpdateRoutes");
 const deleteRoutes = require("./routes/deleteRoutes");
+const questionRoutes = require("./routes/questionRoutes");
+const submitAnswer = require("./routes/submitAnswerRoutes");
 const Topic = require("./routes/topicRoutes");
-const { connectDB, populateDatabase } = require("./config/db");
+const { connectDB } = require("./config/db");
 const cookieParser = require("cookie-parser");
-
 
 connectDB(); //connection to mongodb database
 // populateDatabase()
@@ -38,10 +39,12 @@ app.use("/api/users/message", messageRoutes);
 app.use("/api/users/subscribe", subscribeRoutes);
 app.use("/api/users/forgetPassword", forgetPassword);
 app.use("/api/users/resetPassword", resetPassword);
-app.use("/api/users/account", detailRoutes)
-app.use("/api/users/account", passwordUpdate)
+app.use("/api/users/account", detailRoutes);
+app.use("/api/users/account", passwordUpdate);
 app.use("/api/users/delete", deleteRoutes);
 app.use("/api/users/topic", Topic);
+app.use("/api/users/questions", questionRoutes);
+app.use("/api/users/submit-answer", submitAnswer);
 
 app.listen(port, () => {
   console.log(`Server listening on http://localhost:${port}`);
