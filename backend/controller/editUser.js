@@ -20,9 +20,9 @@ async function editUser(req, res) {
       .status(200)
       .json({ success: true, message: "User updated successfully" });
   } catch (error) {
+    console.log(error);
     res.status(500).json({ success: false, message: "Something went wrong" });
   }
 }
 
-
-module.exports = { editUser };
+module.exports = editUser;

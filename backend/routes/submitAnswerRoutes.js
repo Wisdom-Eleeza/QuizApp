@@ -4,3 +4,5 @@ const submitAnswer = require('../controller/submitAnswerController')
 
 
 router.post('/', submitAnswer)
+
+module.exports = router

@@ -1,6 +1,7 @@
 const { userModel } = require("../models/userModels");
 const nodemailer = require("nodemailer");
 const jwt = require("jsonwebtoken");
+require("dotenv").config();
 
 // @desc Register new user
 // @route POST /api/users/forgetPassword
@@ -59,7 +60,6 @@ const forgetPassword = async (req, res) => {
       </p>`,
       //Email body, containing the reset password link
     };
-
     // Sending the password reset email
     transporter.sendMail(mailOptions, (error) => {
       if (error) {

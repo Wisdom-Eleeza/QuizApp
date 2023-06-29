@@ -1,24 +1,41 @@
-const data = require('../models/dataModel')
+const dataModel = require("../models/dataModel");
 
-
-
+// @desc Reset user password
+// @route POST /api/users/submit-answer
+// @access Private
 const submitAnswer = async (req, res) => {
-    const { questionId, answerId } = req.body
+  const answers = req.body;
+  console.log(req.body)
 
-    try {
-        const topic = await data.findOne({ 'questions._id': questionId })
-        const question = topic.questions.id(questionId)
-        const selectedAnswer = question.answers.id(answerId)
+  try {
+    // use the dataModel to find questions based on the id field matching questionId value in the answer array
+    const questions = await dataModel.find({
+      _id: { $in: answers.map((a) => a.questionId) },
+    });
 
-        if(selectedAnswer.is_correct){
-            res.status().json({ success: true, message: "Incorrect answer"})
-        } else {
-            res.status().json({ success: false, message: "Incorrect answer"})
-        }
-    } catch (error) {
-        console.log(error.message)
-        res.status(500).json({ error: "Failed to submit answer" })
-    }
-}
+    let score = 0;
+    // Iterate over each question in the questions array
+    questions.forEach((question) => {
+      const selectedAnswer = answers.find(
+        (a) => a.questionId.toString() === question._id.toString()
+      );
 
-module.exports = submitAnswer
+      // Check if a selectedAnswer exists and matches the correct answer for the question
+      if (
+        selectedAnswer &&
+        selectedAnswer.selectedAnswer ===
+          question.answer.find((a) => a.is_correct).text
+      ) {
+        score += question.points; // Increment the score by the points associated with the question
+      }
+    });
+    res.status(200).json({ success: true, message: score });
+  } catch (error) {
+    console.log(error.message);
+    res
+      .status(500)
+      .json({ success: false, message: "Error submitting answers." });
+  }
+};
+
+module.exports = submitAnswer;
