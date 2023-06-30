@@ -1,21 +1,23 @@
 const dataModel = require("../models/dataModel");
 
-// @desc Fetching topics without questions, points and answers
+// @desc Fetching topics without questions, points, and answers
 // @route POST /api/users/topic
 // @access Private
 const Topic = async (req, res) => {
   try {
-    const { _id } = req.body;
-    console.log(req.body);
-    const topicData = await dataModel.findById(_id);
+    const topicData = await dataModel.find();
 
-    if (topicData) {
-      const { topic, desktopImage } = topicData;
-      return res
-        .status(200)
-        .json({ success: true, topic, desktopImage, topicId: _id });
+    if (topicData.length > 0) {
+      const topics = topicData.map((data) => ({
+        _id: data._id,
+        topic: data.topic,
+        desktopImage: data.desktopImage,
+      }));
+      
+      console.log({ success: true, message: topics });
+      return res.status(200).json({ success: true, message: topics });
     } else {
-        return res.status(404).json({ success: false, message: "Topic Not Found"})
+      return res.status(404).json({ success: false, message: "Topic Not Found" });
     }
   } catch (error) {
     console.log(error.message);

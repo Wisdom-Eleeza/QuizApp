@@ -42,7 +42,7 @@ app.use("/api/users/resetPassword", resetPassword);
 app.use("/api/users/account", detailRoutes);
 app.use("/api/users/account", passwordUpdate);
 app.use("/api/users/delete", deleteRoutes);
-app.use("/api/users/topic", Topic);
+app.use("/api/users/topics", Topic);
 app.use("/api/users/questions", questionRoutes);
 app.use("/api/users/submit-answer", submitAnswer);
 
