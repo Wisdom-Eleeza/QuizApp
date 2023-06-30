@@ -14,11 +14,11 @@ const deleteRoutes = require("./routes/deleteRoutes");
 const questionRoutes = require("./routes/questionRoutes");
 const submitAnswer = require("./routes/submitAnswerRoutes");
 const Topic = require("./routes/topicRoutes");
-const { connectDB } = require("./config/db");
+const { connectDB, populateDatabase } = require("./config/db");
 const cookieParser = require("cookie-parser");
 
 connectDB(); //connection to mongodb database
-// populateDatabase()
+// populateDatabase();
 
 dotenv.config();
 const port = process.env.PORT || 5000;
@@ -42,7 +42,7 @@ app.use("/api/users/resetPassword", resetPassword);
 app.use("/api/users/account", detailRoutes);
 app.use("/api/users/account", passwordUpdate);
 app.use("/api/users/delete", deleteRoutes);
-app.use("/api/users/topic", Topic);
+app.use("/api/users/topics", Topic);
 app.use("/api/users/questions", questionRoutes);
 app.use("/api/users/submit-answer", submitAnswer);
 
