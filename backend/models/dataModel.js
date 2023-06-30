@@ -14,6 +14,7 @@ const questionSchema = new Schema({
 
 const topicSchema = new Schema({
   topic: String,
+  desktopImage: String,
   questions: [questionSchema],
 });
 

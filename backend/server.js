@@ -14,11 +14,11 @@ const deleteRoutes = require("./routes/deleteRoutes");
 const questionRoutes = require("./routes/questionRoutes");
 const submitAnswer = require("./routes/submitAnswerRoutes");
 const Topic = require("./routes/topicRoutes");
-const { connectDB } = require("./config/db");
+const { connectDB, populateDatabase } = require("./config/db");
 const cookieParser = require("cookie-parser");
 
 connectDB(); //connection to mongodb database
-// populateDatabase()
+// populateDatabase();
 
 dotenv.config();
 const port = process.env.PORT || 5000;
